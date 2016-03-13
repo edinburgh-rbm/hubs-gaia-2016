@@ -19,7 +19,7 @@
 \tikzset{whixlan/.style = {orange,thick,dotted} }
 
 \tikzset{memnode/.style = {forestgreen,fill=forestgreen!20} }
-\tikzset{memout/.style = {dotted,rounded corners=4pt} }
+\tikzset{memout/.style = {dotted,thick,rounded corners=4pt} }
 \tikzset{memlink/.style = {royalblue,very thick}}
 \tikzset{memlabel/.style = {}}
 
@@ -314,11 +314,11 @@
 %%
 \newcommand{\whixmemout}{
   %% hebnet
-  \draw[memout] (-2,-5) rectangle (1.3,-1.4);
+  \draw[memout] (-2.5,-5) rectangle (1.3,-1.4);
   %% skyenet
   \draw[memout] (-2.5,-1.2) rectangle (0.5,4.25);
   %% knoydart
-  \draw[memout] (4.5,-2) rectangle (6.5,0);
+  \draw[memout] (4.5,-1.25) rectangle (6.5,0);
   %% tegola
   \draw[memout] (3.5,0.5) rectangle (6.5,3);
   %% glenelg
@@ -326,7 +326,7 @@
   %% appelnet
   \draw[memout] (-3,6.5) -- (-0.5,6) -- (2,7) -- (3,8.5);
   %% glenuig
-  \draw[memout] (1.8,-7) rectangle (6,-4.5);
+  \draw[memout] (2.5,-6.5) rectangle (6.25,-4);
   %% mict
   \draw[memout] (-1,-8) -- (-0,-7) -- (1,-7) -- (2,-8);
   %% cmnet
