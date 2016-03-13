@@ -45,7 +45,7 @@
 %%
 \newcommand{\whixmeshdiagram}{
   \whixsites
-  %% \whixwater\whixland
+%  \whixwater\whixland
   \whixmesh
   \whixlonghaul
   \whixmem
@@ -157,17 +157,18 @@
 %% self-explanatory, whix sites
 %%
 \newcommand{\whixsites}{
-  \node (smo) at (0.75,0) {};
-  \node (mhs) at (5,-2.5) {};
+  \node (smo) at (0.75,0.5) {};
+  \node (mhs) at (4.5,-2.5) {};
   \node (eig) at (0, -3.5) {};
   \node (rum) at (-1, -2.5) {};
   \node (muk) at (0.5,-4.5) {};
-  \node (mah) at (5,2.5) {};
+  \node (can) at (-2,-2) {};
+  \node (mah) at (4,2.5) {};
   \node (ccr) at (0.5,2.5) {};
-  \node (cdg) at (5,0) {};
-  \node (aig) at (5,-5) {};
-  \node (glb) at (5, 4) {};
-  \node (kyl) at (5, 6) {};
+  \node (cdg) at (4.5,0) {};
+  \node (aig) at (4.5,-3.75) {};
+  \node (glb) at (3, 4) {};
+  \node (kyl) at (2, 6) {};
   \node (psg) at (8.5, -5) {};
 }
 
@@ -179,7 +180,8 @@
   \draw[land] (eig) circle (0.6);
   \draw[land] (rum) circle (0.6);
   \draw[land] (muk) circle (0.3);
-
+  \draw[land] (can) circle (0.3);
+  
   %% skye
   \draw[land]
     (-3,3) -- (-1,4) -- (-1,-1) -- (1,-1) -- (1,5) -- (-3,6);
@@ -192,15 +194,15 @@
   % ardnamurchan
   (10,-7.5) -- (2, -7.5) -- (2,-6.5) -- (6,-6) --
   %% lochaber
-  (4,-5.5) -- (4,-2) -- (7,-1.5) --
+  (5,-5.5) -- (5,-5) -- (6,-4.5) -- (4,-4) -- (4,-2) -- (7,-1.5) --
   %% knoydart
-  (4,-0.5) -- (4,1) -- (7,1.5) --
+  (4,-0.5) -- (3,1) -- (7,1.5) --
   %% glenelg
-  (4,2) -- (4,4.5) -- (7,5) --
+  (4,2) -- (2,3) -- (2,4.5) -- (7,5) --
   %% kyle
-  (4,5.5) -- (4,6.5) -- (6,7) --
+  (1,5.5) -- (1,6.5) -- (4,7) --
   %% applecross
-  (3,7.5) -- (2.5,8.5) -- (10,8.5);
+  (1,7.5) -- (0.5,8.5) -- (10,8.5);
   
   %% mull
   \draw[land] (-0.5,-8) -- (0,-7.5) -- (1,-7.5) -- (1.5,-8);
@@ -212,14 +214,14 @@
 \newcommand{\whixlandlabels}{
   \node[landlabel] at (0.25,-2.25) { \labelblock{\em{Small\\Isles}} };
   \node[landlabel] at (-1.5,4.75) { \em{\huge Skye} };
-  \node[landlabel,rotate=90] at (0,2) { \em{Sleat} };
+  \node[landlabel,rotate=90] at (0,0 ) { \em{\large Sleat} };
   \node[landlabel,rotate=345] at (-1.5,6.75) { \em{Raasay} };
   \node[landlabel] at (4,-7) { \em{Ardnamurchan} };
-  \node[landlabel] at (4,8) { \em{\large Applecross} };
+  \node[landlabel] at (2,8) { \em{\large Applecross} };
   \node[landlabel] at (0.5,-7.75) { \em{Mull} };
   \node[landlabel] at (6,-0.5) { \em{Knoydart} };
-  \node[landlabel] at (4.75,3.25) { \em{Glenelg} };
-  \node[landlabel] at (6.5,-3.5) { \em{\huge Lochaber} };
+  \node[landlabel] at (2.75,3.25) { \em{Glenelg} };
+  \node[landlabel] at (7,-3) { \em{\huge Lochaber} };
   \node[landlabel] at (6.25,-6.5) { \em{Moidart} };
   \node[landlabel] at (8,7) { \labelblock{\em{\huge Wester\\Ross}} };
 }
@@ -235,11 +237,20 @@
 %% labels for water bodies
 %%
 \newcommand{\whixwaterlabels}{
-  \node[rotate=90,waterlabel] at (2.5,2) { \em{\Huge Sound of Sleat} };
-  \node[rotate=345,waterlabel] at (0,7.5) { \em{\Large Sound of Raasay} };
+  \node[rotate=115,waterlabel] at (2.5,0.5) { \em{\huge Sound of Sleat} };
+  \node[rotate=345,waterlabel] at (-1.5,6.15) { \em{Sound of Raasay} };
+  \node[rotate=345,waterlabel] at (-1,8) { \em{Inner Sound} };
   \node[waterlabel] at (4.5,1.5) { \em{Loch Hourn} };
   \node[waterlabel] at (4.95,-1.35) { \em{Loch Nevis} };
   \node[waterlabel] at (5,-7.75) { \em{Sound of Mull} };
+  \node[rotate=90,waterlabel] at (1.5,3.5) { \em{Kyle Rhea} };
+  \node[waterlabel] at (2.5,5) { \em{Loch Alsh} };
+  \node[waterlabel] at (1.75,7) { \em{Loch Carron} };
+  \node[rotate=90,waterlabel] at (-1.75,2) { \em{\large Loch Eishort} };
+  \node[waterlabel] at (3.75,-5) { \labelblock{\em{\Large Sound of\\Arisaig}} };
+
+%  \node[waterlabel] at (4.25,-4.55) { \labelblock{\em{Loch\\nan Uamh}} };
+%  \node[waterlabel] at (4,-5.75) { \em{Loch Ailort} };
 }
 
 %%
@@ -278,7 +289,7 @@
 }
 
 \newcommand{\whixlonghaul}{
-  \path[whixlink,longhaul] (kyl) edge [out=50,in=90] (psg);
+  \path[whixlink,longhaul] (kyl) edge [out=0,in=90] (psg);
   \path[whixlink,longhaul] (mhs) edge [out=330,in=180] (psg);
 }
 
@@ -311,15 +322,15 @@
   %% tegola
   \draw[memout] (3.5,0.5) rectangle (6.5,3);
   %% glenelg
-  \draw[memout] (3.5,3.5) rectangle (6,4.5);
+  \draw[memout] (1.75,2.75) rectangle (3.25,3.5);
   %% appelnet
-  \draw[memout] (-3,6.5) -- (0.5,5.5) -- (4,7) -- (4,8.5);
+  \draw[memout] (-3,6.5) -- (-0.5,6) -- (2,7) -- (3,8.5);
   %% glenuig
   \draw[memout] (1.8,-7) rectangle (6,-4.5);
   %% mict
   \draw[memout] (-1,-8) -- (-0,-7) -- (1,-7) -- (2,-8);
   %% cmnet
-  \draw[memout] (5,6.5) rectangle (7,7.5);
+  \draw[memout] (3,6.5) rectangle (5,7.5);
 }
 
 %%
@@ -328,14 +339,14 @@
 \newcommand{\whixmem}{
   \node (skyenet) at (-0.5,1) {};
   \node (tegola) at (6,2) {};
-  \node (glenelg) at (4.5,3.5) {};
+  \node (glenelg) at (3,3) {};
   \node (hebnet) at (-0.5,-3) {};
   \node (knoydart) at (5.5,-0.5) {};
   \node (moidart) at (5,-6.5) {};
   \node (mict) at (0.5,-7.75) {};
-  \node (applecross) at (3.5,8) {};
+  \node (applecross) at (2,8) {};
   \node (hubs) at (9,-6.5) {};
-  \node (cmnet) at (6.25,7.25) {};
+  \node (cmnet) at (4.25,7) {};
 }
 
 %%
@@ -386,7 +397,7 @@
   \node[memlabel,left of=hubs] { HUBS };
   \node[memlabel,below right of=knoydart] {\hspace{1em}\labelblock{Knoydart\\Foundation} };
   \node[memlabel,above right of=tegola] { Tegola };
-  \node[memlabel,left of=glenelg] { Glenelg };
+  \node[memlabel,right of=glenelg] { Glenelg };
   \node[memlabel,right of=applecross] { \hspace{1em}Applenet };
   \node[memlabel,right of=cmnet] { CMNet };
 }
@@ -399,7 +410,11 @@
   \draw[whixlan] (mhs) -- (eig);
   \draw[whixlan] (mhs) -- (smo);
   \draw[whixlan] (mhs) -- (ccr);
-
+  \draw[whixlan] (mhs) -- (cdg);
+  \draw[whixlan] (mhs) -- (mah);
+  \draw[whixlan] (mhs) -- (glb);
+  \draw[whixlan] (mhs) -- (kyl);
+  
   \draw[whixlan] (smo) -- (psg);
   \draw[whixlan] (smo) -- (aig);
   \draw[whixlan] (smo) -- (eig);
@@ -413,6 +428,10 @@
   \draw[whixlan] (aig) -- (eig);
   \draw[whixlan] (aig) -- (ccr);
   \draw[whixlan] (aig) -- (kyl);
+  \draw[whixlan] (aig) -- (mhs);
+  \draw[whixlan] (aig) -- (mah);
+  \draw[whixlan] (aig) -- (glb);
+  \draw[whixlan] (aig) -- (cdg);
   
   \draw[whixlan] (eig) -- (psg);
   \draw[whixlan] (eig) -- (cdg);
