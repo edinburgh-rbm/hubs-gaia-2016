@@ -1,0 +1,437 @@
+\ProvidesPackage{whix}
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\definecolor{firebrick}{RGB}{178,34,34}
+\definecolor{forestgreen}{RGB}{31,139,34}
+\definecolor{royalblue}{RGB}{65,105,225}
+
+%%
+%% styling and colours and such
+%%
+\tikzset{land/.style = {forestgreen,fill=forestgreen!20,rounded corners=4pt} }
+\tikzset{landlabel/.style = {forestgreen} }
+\tikzset{water/.style = {royalblue,fill=royalblue!20} }
+\tikzset{waterlabel/.style = {royalblue} }
+
+\tikzset{whixnode/.style = {firebrick,fill=firebrick!20} }
+\tikzset{whixlink/.style = {thick} }
+\tikzset{longhaul/.style = {orange} }
+\tikzset{whixlan/.style = {orange,thick,dotted} }
+
+\tikzset{memnode/.style = {forestgreen,fill=forestgreen!20} }
+\tikzset{memout/.style = {dotted,rounded corners=4pt} }
+\tikzset{memlink/.style = {royalblue,very thick}}
+\tikzset{memlabel/.style = {}}
+
+\tikzset{toponode/.style = {draw,circle,fill=white}}
+
+%%
+%% put together a physical diagram
+%%
+\newcommand{\whixphysicaldiagram}{
+  \whixsites
+  \whixwater
+  \whixwaterlabels
+  \whixland
+  \whixlandlabels
+  \whixmemout
+  \whixlinks
+  \whixnodes
+  \whixlabels
+}
+
+%%
+%% put together a diagram of mesh topology
+%%
+\newcommand{\whixmeshdiagram}{
+  \whixsites
+  %% \whixwater\whixland
+  \whixmesh
+  \whixlonghaul
+  \whixmem
+  \whixmemlinks
+  \begin{scope}
+    \tikzset{whixnode/.style = {firebrick,dotted,fill=firebrick!20}}
+    \whixnodes
+  \end{scope}
+  \whixmemnodes
+  \whixmemlabels
+}
+
+%%
+%% topological diagram
+%%
+
+\newcommand{\whixtopodiagram}{
+  \draw[forestgreen!20,fill=forestgreen!20] (40:6.5) circle(2.5);
+  \draw[royalblue!20,fill=royalblue!20] (0,0) circle (4);
+
+  \node[toponode,dotted] (internet) at (40:9) { \labelblock{Internet\\Default-free\\Zone} };
+  \draw[dotted] (90:6.5) -- (-20:8.5);
+
+  \begin{scope}[shift={(6.75,-1.5)}]
+    \node at (-120:0.75) { \labelblock{WCIX /\\WHAN} };
+    \node at (40:0.75) { Internet };
+  \end{scope}
+  
+  \node[toponode] (hubs) at (36:5) { \labelblock{HUBS\\AS60241} };
+  \node[toponode] (tegola) at (72:4) { Tegola };
+  \node[toponode] (glenelg) at (108:4) { Glenelg };
+  \node[toponode] (cmnet) at (144:4) { CMnet };
+  \node[toponode] (applecross) at (180:4) { Applenet };
+  \node[toponode] (skyenet) at (216:4) { Skyenet };
+  \node[toponode] (hebnet) at (252:4) { Hebnet };
+  \node[toponode] (mict) at (288:4) { Argyll };
+  \node[toponode] (moidart) at (324:4) { Moidart };
+  \node[toponode] (knoydart) at (0:4) { Knoydart };
+
+  \path[longhaul,very thick,out=0,in=270] (hubs) edge (internet);
+  \path[longhaul,very thick,out=90,in=180] (hubs) edge (internet);
+  
+  \path[memlink,out=252,in=288] (tegola) edge (glenelg);
+  \path[memlink,out=252,in=324] (tegola) edge (cmnet);
+  \path[memlink,out=252,in=0] (tegola) edge (applecross);
+  \path[memlink,out=252,in=36] (tegola) edge (skyenet);
+  \path[memlink,out=252,in=72] (tegola) edge (hebnet);
+  \path[memlink,out=252,in=108] (tegola) edge (mict);
+  \path[memlink,out=252,in=144] (tegola) edge (moidart);
+  \path[memlink,out=252,in=180] (tegola) edge (knoydart);
+
+  \path[memlink,out=288,in=324] (glenelg) edge (cmnet);
+  \path[memlink,out=288,in=0] (glenelg) edge (applecross);
+  \path[memlink,out=288,in=36] (glenelg) edge (skyenet);
+  \path[memlink,out=288,in=72] (glenelg) edge (hebnet);
+  \path[memlink,out=288,in=108] (glenelg) edge (mict);
+  \path[memlink,out=288,in=144] (glenelg) edge (moidart);
+  \path[memlink,out=288,in=180] (glenelg) edge (knoydart);
+
+  \path[memlink,out=324,in=0] (cmnet) edge (applecross);
+  \path[memlink,out=324,in=36] (cmnet) edge (skyenet);
+  \path[memlink,out=324,in=72] (cmnet) edge (hebnet);
+  \path[memlink,out=324,in=108] (cmnet) edge (mict);
+  \path[memlink,out=324,in=144] (cmnet) edge (moidart);
+  \path[memlink,out=324,in=180] (cmnet) edge (knoydart);
+  
+  \path[memlink,out=0,in=36] (applecross) edge (skyenet);
+  \path[memlink,out=0,in=72] (applecross) edge (hebnet);
+  \path[memlink,out=0,in=108] (applecross) edge (mict);
+  \path[memlink,out=0,in=144] (applecross) edge (moidart);
+  \path[memlink,out=0,in=180] (applecross) edge (knoydart);
+
+  \path[memlink,out=36,in=72] (skyenet) edge (hebnet);
+  \path[memlink,out=36,in=108] (skyenet) edge (mict);
+  \path[memlink,out=36,in=144] (skyenet) edge (moidart);
+  \path[memlink,out=36,in=180] (skyenet) edge (knoydart);
+
+  \path[memlink,out=72,in=108] (hebnet) edge (mict);
+  \path[memlink,out=72,in=144] (hebnet) edge (moidart);
+  \path[memlink,out=72,in=180] (hebnet) edge (knoydart);
+
+  \path[memlink,out=108,in=144] (mict) edge (moidart);
+  \path[memlink,out=108,in=180] (mict) edge (knoydart);
+
+  \path[memlink,out=144,in=180] (moidart) edge (knoydart);
+
+  \path[longhaul,thick,out=216,in=252] (hubs) edge (tegola);
+  \path[longhaul,thick,out=216,in=288] (hubs) edge (glenelg);
+  \path[longhaul,thick,out=216,in=324] (hubs) edge (cmnet);
+  \path[longhaul,thick,out=216,in=0] (hubs) edge (applecross);
+  \path[longhaul,thick,out=216,in=36] (hubs) edge (skyenet);
+  \path[longhaul,thick,out=216,in=72] (hubs) edge (hebnet);
+  \path[longhaul,thick,out=216,in=108] (hubs) edge (mict);
+  \path[longhaul,thick,out=216,in=144] (hubs) edge (moidart);
+  \path[longhaul,thick,out=216,in=180] (hubs) edge (knoydart);
+}
+
+
+%% utility macro so that we can have line breaks
+%% in node labels
+\newcommand{\labelblock}[1]{
+  \begin{minipage}{2.5cm}
+    \centering
+    #1
+  \end{minipage}
+}
+
+%%
+%% self-explanatory, whix sites
+%%
+\newcommand{\whixsites}{
+  \node (smo) at (0.75,0) {};
+  \node (mhs) at (5,-2.5) {};
+  \node (eig) at (0, -3.5) {};
+  \node (rum) at (-1, -2.5) {};
+  \node (muk) at (0.5,-4.5) {};
+  \node (mah) at (5,2.5) {};
+  \node (ccr) at (0.5,2.5) {};
+  \node (cdg) at (5,0) {};
+  \node (aig) at (5,-5) {};
+  \node (glb) at (5, 4) {};
+  \node (kyl) at (5, 6) {};
+  \node (psg) at (8.5, -5) {};
+}
+
+%%
+%% land masses in the sound of sleat region
+%%
+\newcommand{\whixland}{
+  %% small isles
+  \draw[land] (eig) circle (0.6);
+  \draw[land] (rum) circle (0.6);
+  \draw[land] (muk) circle (0.3);
+
+  %% skye
+  \draw[land]
+    (-3,3) -- (-1,4) -- (-1,-1) -- (1,-1) -- (1,5) -- (-3,6);
+  
+  %% raasay
+  \draw[land]
+    (-3,7) -- (0,6) -- (0,6.5) -- (-3,7.5);
+  
+  \draw[land]
+  % ardnamurchan
+  (10,-7.5) -- (2, -7.5) -- (2,-6.5) -- (6,-6) --
+  %% lochaber
+  (4,-5.5) -- (4,-2) -- (7,-1.5) --
+  %% knoydart
+  (4,-0.5) -- (4,1) -- (7,1.5) --
+  %% glenelg
+  (4,2) -- (4,4.5) -- (7,5) --
+  %% kyle
+  (4,5.5) -- (4,6.5) -- (6,7) --
+  %% applecross
+  (3,7.5) -- (2.5,8.5) -- (10,8.5);
+  
+  %% mull
+  \draw[land] (-0.5,-8) -- (0,-7.5) -- (1,-7.5) -- (1.5,-8);
+}
+
+%%
+%% labels for nald masses
+%%
+\newcommand{\whixlandlabels}{
+  \node[landlabel] at (0.25,-2.25) { \labelblock{\em{Small\\Isles}} };
+  \node[landlabel] at (-1.5,4.75) { \em{\huge Skye} };
+  \node[landlabel,rotate=90] at (0,2) { \em{Sleat} };
+  \node[landlabel,rotate=345] at (-1.5,6.75) { \em{Raasay} };
+  \node[landlabel] at (4,-7) { \em{Ardnamurchan} };
+  \node[landlabel] at (4,8) { \em{\large Applecross} };
+  \node[landlabel] at (0.5,-7.75) { \em{Mull} };
+  \node[landlabel] at (6,-0.5) { \em{Knoydart} };
+  \node[landlabel] at (4.75,3.25) { \em{Glenelg} };
+  \node[landlabel] at (6.5,-3.5) { \em{\huge Lochaber} };
+  \node[landlabel] at (6.25,-6.5) { \em{Moidart} };
+  \node[landlabel] at (8,7) { \labelblock{\em{\huge Wester\\Ross}} };
+}
+
+%%
+%% water bodies 
+%%
+\newcommand{\whixwater}{
+  \draw[water] (-3,-8) -- (-3,8.5) -- (10,8.5) -- (10,-8) -- (-3,-8);
+}
+
+%%
+%% labels for water bodies
+%%
+\newcommand{\whixwaterlabels}{
+  \node[rotate=90,waterlabel] at (2.5,2) { \em{\Huge Sound of Sleat} };
+  \node[rotate=345,waterlabel] at (0,7.5) { \em{\Large Sound of Raasay} };
+  \node[waterlabel] at (4.5,1.5) { \em{Loch Hourn} };
+  \node[waterlabel] at (4.95,-1.35) { \em{Loch Nevis} };
+  \node[waterlabel] at (5,-7.75) { \em{Sound of Mull} };
+}
+
+%%
+%% depiction of nodes for whix sites.
+%%
+\newcommand{\whixnodes}{
+  \draw[whixnode] (smo) circle (0.2);
+  \draw[whixnode] (cdg) circle (0.2);
+  \draw[whixnode] (eig) circle (0.2);
+  \draw[whixnode] (mhs) circle (0.2);
+  \draw[whixnode] (aig) circle (0.2);
+  \draw[whixnode] (eig) circle (0.2);
+  \draw[whixnode] (mah) circle (0.2);
+  \draw[whixnode] (ccr) circle (0.2);
+  \draw[whixnode] (kyl) circle (0.2);
+  \draw[whixnode] (glb) circle (0.2);
+  \draw[whixnode] (psg) circle (0.2);
+}
+
+%%
+%% whix physical links
+%%
+\newcommand{\whixlinks}{
+  \draw[whixlink] (mhs) -- (eig);
+  \draw[whixlink] (mhs) -- (smo);
+  \draw[whixlink] (smo) -- (mah);
+  \draw[whixlink] (mah) -- (ccr);
+  \draw[whixlink] (mhs) -- (ccr);
+  \draw[whixlink] (cdg) -- (eig);
+  \draw[whixlink] (smo) -- (cdg);
+  \draw[whixlink] (aig) -- (eig);
+  \draw[whixlink,longhaul] (aig) -- (mhs);
+  \draw[whixlink] (glb) -- (ccr);
+  \draw[whixlink] (kyl) -- (glb);
+  \whixlonghaul
+}
+
+\newcommand{\whixlonghaul}{
+  \path[whixlink,longhaul] (kyl) edge [out=50,in=90] (psg);
+  \path[whixlink,longhaul] (mhs) edge [out=330,in=180] (psg);
+}
+
+%%
+%% labels for whix sites
+%%
+\newcommand{\whixlabels}{
+  \node[right of=aig] { Arisaig };
+  \node[right of=mhs] { Mallaig };
+  \node[above right of=cdg] { \labelblock{Creagan\\Dearga} };
+  \node[right of=mah] { \hspace{1.5em}\labelblock{Coille\\Mhialairigh} };
+  \node[right of=glb] { \labelblock{Glas\\Bheinn} };
+  \node[right of=kyl] { \labelblock{Kyle of\\Lochalsh} };
+  \node[above left of=ccr] { \labelblock{Camus\\Croise} };
+  \node[above left of=smo] { \labelblock{Sabhal M\'or\\Ostaig} };
+  \node[below left of=eig] { Eigg };
+  \node[below of=psg] { \labelblock{Pulsant\\South Gyle\\Edinburgh} };
+}
+
+%%
+%% outlines of whix member sites
+%%
+\newcommand{\whixmemout}{
+  %% hebnet
+  \draw[memout] (-2,-5) rectangle (1.3,-1.4);
+  %% skyenet
+  \draw[memout] (-2.5,-1.2) rectangle (0.5,4.25);
+  %% knoydart
+  \draw[memout] (4.5,-2) rectangle (6.5,0);
+  %% tegola
+  \draw[memout] (3.5,0.5) rectangle (6.5,3);
+  %% glenelg
+  \draw[memout] (3.5,3.5) rectangle (6,4.5);
+  %% appelnet
+  \draw[memout] (-3,6.5) -- (0.5,5.5) -- (4,7) -- (4,8.5);
+  %% glenuig
+  \draw[memout] (1.8,-7) rectangle (6,-4.5);
+  %% mict
+  \draw[memout] (-1,-8) -- (-0,-7) -- (1,-7) -- (2,-8);
+  %% cmnet
+  \draw[memout] (5,6.5) rectangle (7,7.5);
+}
+
+%%
+%% anchors for member sites
+%%
+\newcommand{\whixmem}{
+  \node (skyenet) at (-0.5,1) {};
+  \node (tegola) at (6,2) {};
+  \node (glenelg) at (4.5,3.5) {};
+  \node (hebnet) at (-0.5,-3) {};
+  \node (knoydart) at (5.5,-0.5) {};
+  \node (moidart) at (5,-6.5) {};
+  \node (mict) at (0.5,-7.75) {};
+  \node (applecross) at (3.5,8) {};
+  \node (hubs) at (9,-6.5) {};
+  \node (cmnet) at (6.25,7.25) {};
+}
+
+%%
+%% member links
+%%
+\newcommand{\whixmemlinks}{
+  \draw[memlink] (skyenet) -- (ccr);
+  \draw[memlink] (skyenet) -- (mah);
+  \draw[memlink] (tegola) -- (mah);
+  \draw[memlink] (tegola) -- (smo);
+  \draw[memlink] (glenelg) -- (glb);
+  \draw[memlink] (hebnet) -- (eig);
+  \draw[memlink] (hebnet) -- (mhs);
+  \draw[memlink] (knoydart) -- (cdg);
+  \draw[memlink] (moidart) -- (aig);
+  \draw[memlink] (mict) -- (eig);
+  \draw[memlink] (skyenet) -- (hebnet);
+  \draw[memlink] (applecross) -- (glb);
+  \draw[memlink] (hubs) -- (psg);
+  \draw[memlink] (cmnet) -- (kyl);
+  \draw[memlink] (cmnet) -- (glb);
+}
+
+%%
+%% member node symbols
+%%
+\newcommand{\whixmemnodes}{
+  \draw[memnode] (skyenet) circle (0.2);
+  \draw[memnode] (tegola) circle (0.2);
+  \draw[memnode] (glenelg) circle (0.2);
+  \draw[memnode] (hebnet) circle (0.2);
+  \draw[memnode] (knoydart) circle (0.2);
+  \draw[memnode] (moidart) circle (0.2);
+  \draw[memnode] (mict) circle (0.2);
+  \draw[memnode] (applecross) circle (0.2);
+  \draw[memnode] (hubs) circle (0.2);
+  \draw[memnode] (cmnet) circle (0.2);
+}
+
+%%
+%% member labels
+%%
+\newcommand{\whixmemlabels}{
+  \node[memlabel,left of=skyenet] { Skyenet };
+  \node[memlabel,left of=hebnet] { Hebnet };
+  \node[memlabel,above right of=mict] { \labelblock{Argyll\\Isles} };
+  \node[memlabel,left of=moidart] { Moidart };
+  \node[memlabel,left of=hubs] { HUBS };
+  \node[memlabel,below right of=knoydart] {\hspace{1em}\labelblock{Knoydart\\Foundation} };
+  \node[memlabel,above right of=tegola] { Tegola };
+  \node[memlabel,left of=glenelg] { Glenelg };
+  \node[memlabel,right of=applecross] { \hspace{1em}Applenet };
+  \node[memlabel,right of=cmnet] { CMNet };
+}
+
+%%
+%% full mesh... not very enlightening
+%%
+\newcommand{\whixmesh}{
+  \draw[whixlan] (mhs) -- (psg);
+  \draw[whixlan] (mhs) -- (eig);
+  \draw[whixlan] (mhs) -- (smo);
+  \draw[whixlan] (mhs) -- (ccr);
+
+  \draw[whixlan] (smo) -- (psg);
+  \draw[whixlan] (smo) -- (aig);
+  \draw[whixlan] (smo) -- (eig);
+  \draw[whixlan] (smo) -- (cdg);
+  \draw[whixlan] (smo) -- (ccr);
+  \draw[whixlan] (smo) -- (mah);
+  \draw[whixlan] (smo) -- (glb);
+  \draw[whixlan] (smo) -- (kyl);
+
+  \draw[whixlan] (aig) -- (psg);
+  \draw[whixlan] (aig) -- (eig);
+  \draw[whixlan] (aig) -- (ccr);
+  \draw[whixlan] (aig) -- (kyl);
+  
+  \draw[whixlan] (eig) -- (psg);
+  \draw[whixlan] (eig) -- (cdg);
+  \draw[whixlan] (eig) -- (ccr);
+  \draw[whixlan] (eig) -- (mah);
+  \draw[whixlan] (eig) -- (glb);
+  \draw[whixlan] (eig) -- (kyl);
+
+  \draw[whixlan] (cdg) -- (psg);
+  \draw[whixlan] (cdg) -- (ccr);
+
+  \draw[whixlan] (ccr) -- (psg);
+  \draw[whixlan] (ccr) -- (mah);
+  \draw[whixlan] (ccr) -- (glb);
+  \draw[whixlan] (ccr) -- (kyl);
+
+  \draw[whixlan] (mah) -- (psg);
+
+  \draw[whixlan] (glb) -- (psg);
+
+  \draw[whixlan] (kyl) -- (psg);
+}

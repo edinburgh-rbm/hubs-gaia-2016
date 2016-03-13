@@ -6,7 +6,8 @@
 
 \usepackage{graphicx}              %
 \usepackage{amsmath}               % http://ctan.org/pkg/amsmath
-\usepackage[all]{onlyamsmath}      % http://ctan.org/tex-archive/macros/latex/contrib/onlyamsmath
+%% this breaks tikz... badly...
+%\usepackage[all]{onlyamsmath}      % http://ctan.org/tex-archive/macros/latex/contrib/onlyamsmath
 \usepackage{url}                   % http://ctan.org/tex-archive/macros/latex/contrib/url
 \usepackage[caption=false]{subfig} % http://ctan.org/tex-archive/macros/latex/contrib/subfig
                                    % The subfig package is deprecated in favour of subcaption,
@@ -14,10 +15,9 @@
                                    % IEEE style files (this is also the reason for [caption=false])
 
 \usepackage{verbatim, xcolor}
+\usepackage{whix} %% shiny wcix diagrams
 \newcommand{\todo}[1]{\textcolor{red}{(to do: #1)}}
 \newcommand{\narrative}[1]{\textcolor{blue}{(narrative: #1)}}
-
-
 
 \begin{document}
 
@@ -159,10 +159,33 @@ xyz.
 
 \section{CIX Architecture} \label{sec:arch} \input{arch}
 
+\begin{figure}[h]
+  \resizebox{\linewidth}{!}{
+    \begin{tikzpicture}
+      \whixtopodiagram
+    \end{tikzpicture}
+  }
+\end{figure}
+
 \section{CIX in Scotland} \label{sec:impl} \input{implementation}
+
+\begin{figure}[h]
+  \resizebox{\linewidth}{!}{
+    \begin{tikzpicture}
+      \whixphysicaldiagram
+    \end{tikzpicture}
+  }
+\end{figure}
 
 \section{Concluding Remarks} \label{sec:conc} \input{conc}
 
+\begin{figure}[h]
+  \resizebox{\linewidth}{!}{
+    \begin{tikzpicture}
+      \whixmeshdiagram
+    \end{tikzpicture}
+  }
+\end{figure}
 
 \bibliographystyle{abbrv}
 \bibliography{paper_cix}
