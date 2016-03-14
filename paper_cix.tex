@@ -16,7 +16,7 @@
 
 \usepackage{verbatim, xcolor}
 \usepackage{whix} %% shiny wcix diagrams
-\newcommand{\todo}[1]{\textcolor{red}{(to do: #1)}}
+\usepackage{todonotes}
 \newcommand{\narrative}[1]{\textcolor{blue}{(narrative: #1)}}
 
 \begin{document}
@@ -49,17 +49,17 @@
 % %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % % --- End of Author Metadata ---
 
-\title{CIX: A Distributed Internet Exchange for Independent Community Networks
+\title{RemIX: A Distributed Internet Exchange for Networks in Remote Places
 % \titlenote{(Produces the permission block, and
 % copyright information). For use with
 % SIG-ALTERNATE.CLS. Supported by ACM.}
 }
- \subtitle{(Pronounced 'kicks,' for Community Internet Exchange)
+% \subtitle{(Pronounced 'kicks,' for Community Internet Exchange)
 % \titlenote{A full version of this paper is available as
 % \textit{Author's Guide to Preparing ACM SIG Proceedings Using
 % \LaTeX$2_\epsilon$\ and BibTeX} at
 % \texttt{www.acm.org/eaddress.htm}}
-}
+%}
 
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -86,7 +86,7 @@
 % without further effort on your part as the last section in
 % the body of your article BEFORE References or any Appendices.
 
-\numberofauthors{5} %  in this sample file, there are a *total*
+\numberofauthors{6} %  in this sample file, there are a *total*
 % of EIGHT authors. SIX appear on the 'first-page' (for formatting
 % reasons) and the remaining two appear in the \additionalauthors section.
 %
@@ -110,6 +110,8 @@
 %        \email{trovato@corporation.com}
 % 2nd. author
  \alignauthor
+ Roger Baig
+ \alignauthor
  Peter Buneman \\ %\titlenote{The secretary disavows
 % any knowledge of this author's actions.}\\
 %        \affaddr{Institute for Clarity in Documentation}\\
@@ -117,6 +119,7 @@
 %        \affaddr{Dublin, Ohio 43017-6221}\\
 %        \email{webmaster@marysville-ohio.com}
 % % 3rd. author
+\and
  \alignauthor
  Marwan Fayed \\ %\titlenote{This author is the
 % one who did all the really hard work.}\\
@@ -124,7 +127,7 @@
 %        \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
 %        \affaddr{Hekla, Iceland}\\
 %        \email{larst@affiliation.org}
- \and  % use '\and' if you need 'another row' of author names
+% use '\and' if you need 'another row' of author names
 % % 4th. author
  \alignauthor
  Michael Fourman \\
@@ -143,7 +146,7 @@ Richard Simmons \\
 
 \maketitle
 \begin{abstract}
-xyz.
+Rural access networks are designed to bridge the `last-mile' broadband gap in regions that are under-served by traditional broadband providers. Their construction is bespoke, driven by their beneficiaries, and determined by physical landscape, population distribution, and monetary budget. Irrespective of their differences, they are joined by one substantial challenge: connecting to the rest of the Internet is prohibitively expensive. HUBS \textsc{c.i.c} was created in Scotland to respond to this. It is a co-operative of access network members that generates the economies of scale required to afford backhaul and Internet transit. While intermediation at the IP layer between the members and the Internet is required for reasons of scale, it is neither necessary nor desirable amongst the member networks themselves. In urban areas, networks could interconnect with each other at an Internet Exchange Point (IXP). In Scotland where the networks are scattered across 80,000km$^2$ of mountain, field, and sea it is not so easy. We bridge this gap with a design for a distributed Internet exchange for access networks in remote places. Doing so allows for bilateral arrangements for mutual support and assistance between these networks, and increases the resilience of access network connectivity. We present the relevant components, and describe our implementation, so that our efforts may be reproduced. 
 \end{abstract}
 
 
@@ -157,7 +160,7 @@ xyz.
 
 \section{Community Network Environment} \label{sec:context} \input{context}
 
-\section{CIX Architecture} \label{sec:arch} \input{arch}
+\section{RemIX Architecture} \label{sec:arch} \input{arch}
 
 \begin{figure}[h]
   \resizebox{\linewidth}{!}{
@@ -165,17 +168,18 @@ xyz.
       \whixtopodiagram
     \end{tikzpicture}
   }
-\end{figure}
-
-\section{CIX in Scotland} \label{sec:impl} \input{implementation}
-
-\begin{figure}[h]
-  \resizebox{\linewidth}{!}{
-    \begin{tikzpicture}
-      \whixphysicaldiagram
-    \end{tikzpicture}
+  \caption{
+  \textbf{Autonomous System topology.} The members of the RemIX in the West
+  Highlands, WHIX form a fully connected network where each may communicate
+  with another over the exchange without intermediation. HUBS is also present
+  and unusually for IXPs will provide Internet transit over the exchange for
+  those members that so require. In practice this is most of them. Note as
+  well the private interconnection, outwith the exchange, between Skyenet 
+  and Hebnet.
   }
 \end{figure}
+
+\section{WHIX in Scotland} \label{sec:impl} \input{scotland}
 
 \section{Concluding Remarks} \label{sec:conc} \input{conc}
 
@@ -189,8 +193,5 @@ xyz.
 
 \bibliographystyle{abbrv}
 \bibliography{paper_cix}
-
-\end{document}
-
 
 \end{document}
