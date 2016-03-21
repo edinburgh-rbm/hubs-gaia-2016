@@ -5,9 +5,14 @@ foundations range in medium (eg. copper or fibre-optic cabling, licensed
 or unlicensed wireless), energy (eg. solar or wind generation or
 mains supplied), and topology (eg. multi-hop,
 one-to-many\narrative{not quite sure what these two mean}). Successful deployments
-have two attributes in common: (i) networks designs are bespoke, suggesting
-there is no one-size-fits-all solution; (ii) communites must be
-invested and involved~\cite{Wallace:2015a, Wallace2015b}. This last is critical.
+have two attributes in common:
+\begin{inparaenum}[(i)]
+  \item networks designs are bespoke, suggesting
+    there is no one-size-fits-all solution;
+  \item communites must be invested and involved~\cite{Wallace:2015a,
+    Wallace2015b}.
+\end{inparaenum}
+This last is critical.
 
 Much work remains to be done on the operation of such networks, but
 the next question is increasingly clear: What options does a remote,
@@ -31,7 +36,26 @@ in the early 19th century}
 
 In the development of the Internet, there is a structure that has
 played a pivotal role in facilitating the interconnection of networks
---- the \acf{IXP}. The role of an \ac{IXP} is primarily economic: if
+--- the \acf{IXP}. As part of the decommissioning of the \ac{NSFNET}
+in the early-mid 1990s, four \acp{NAP} were created, each operated by
+a large American telephone company (MCI, Sprint, PacBell, Ameritech)
+to help ensure that the fledgeling commercial Internet did not suffer
+a
+partition~\cite{hayes1997computing,Ager:2012:ALE:2342356.2342393}. Being
+operated by vested interests, the barriers to participation at
+the \acp{NAP} were high in terms of cost and equipment. As an
+alternative, \acp{IXP} began to appear in carrier-neutral
+facilities. The networking community recognised that mutual
+interconnections were desireable and that the function of
+the \acp{NAP} was a necessary one, but that they ought not to be
+operated by carriers because of the conflicts of interest that
+inevitably arose\footnote{One of the authors was a participant in
+early \acp{IXP} that were quite literally just an ethernet switch in a
+convenient place and any network could connect under their own steam
+was welcome for a peppercorn yearly fee.}. There are now several
+hundred such \acp{IXP} around the world.
+
+The role of an \ac{IXP} is primarily economic: if
 you have $n$ networks that should be connected together, that is
 $\frac{n^2}{2}$ circuits that have to be organised between them,
 possibly across many sites. Instead, if these networks agree to meet
@@ -39,19 +63,24 @@ at a single place, only $n$ such circuits need to be organised
 provided that the central place has some sort of neutral, automatic
 multipoint to multipoint switching arrangement. This arrangement is
 called an \ac{IXP} and any network present there is free to make
-arrangements with any other\footnote{One of the authors was a
-participant in early \acp{IXP} that were quite literally just an
-ethernet switch in a convenient place and any network could connect
-under their own steam was welcome for a peppercorn yearly fee.}.
+arrangements with any other. To avoid the kinds of conflicts of
+interest mentioned above, \acp{IXP} are typically organised as a not
+for profit entity, and treated as a cost-centre by its members.
 
-It is unusual today for an \acp{IXP} to be operated by for-profit
-entities and though this was not always the
-case~\cite{Ager:2012:ALE:2342356.2342393,Chatzis:2013:MIM:2541468.2541473,hayes1997computing}, 
-in their modern form they operate as cost centres whose financing is
-the collective concern of their members.
-
-In Scotland, we have taken inspiration from Internet Exchange
-Points. In urban regions, IXPs are used. Describe IXPs, and that they
-are not-for-profit in most parts of the world...
+This model of multilateral public peering leads to a very high
+density of interconnection and traffic flux across the exchange that
+in some cases is comparable in magnitude to the largest global
+service providers~\cite{Ager:2012:ALE:2342356.2342393}. This
+observation is the first indication that such a topology might be
+useful for bringing together several remote networks in order that
+this increased density of interconnection can be used to pool traffic
+to make collective use of expensive resources such as long-distance
+circuits. There are some important differences between the environment
+of typical \acp{IXP} and that on the West Coast of Scotland:
+\begin{inparaenum}[(i)]
+  \item there are no data centres there, carrier-neutral or otherwise;
+  \item due to geography there is no single place where all of the
+    networks could meet.
+\end{inparaenum}
 
 In this paper we present 
