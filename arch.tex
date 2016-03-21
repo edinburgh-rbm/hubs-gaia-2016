@@ -1,1 +1,26 @@
-\narrative{Overview of technical details that are generally applicable and transferable.}
+In this section we describe the RemIX architecture.
+
+\subsection{Design Requirements}
+
+\begin{itemize}
+    \item must behave like ethernet switch for pt to multipt comms 
+    \item IX buildings do exactly this
+    \item how to reproduce remotely?
+\end{itemize}
+
+\todo[inline]{find pt2multipt name from MEF}
+
+\subsection{Required Components}
+\begin{itemize}
+    \item AS number required
+    \item ethernet circuits
+    \item internally BGP (we used VPLS) to allow policies and police activity
+\end{itemize}
+
+
+\subsection{Structural Benefits}
+\begin{itemize}
+    \item provides default transit to Internet (useful because of IP limits - have to be careful about if/how to raise IP issue)
+    \item BGP solves $n^2$ connects, gives bilateral arrangements
+    \item (in our case) BGP is also the foundation of exchange fabric, i.e. pt2pt circuits that mimic ethernet
+\end{itemize}

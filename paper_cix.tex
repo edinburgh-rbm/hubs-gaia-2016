@@ -15,6 +15,7 @@
                                    % IEEE style files (this is also the reason for [caption=false])
 
 \usepackage{verbatim, xcolor}
+\usepackage{acronyms}
 \usepackage{whix} %% shiny wcix diagrams
 \usepackage{todonotes}
 \newcommand{\narrative}[1]{\textcolor{blue}{(narrative: #1)}}
@@ -49,7 +50,7 @@
 % %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % % --- End of Author Metadata ---
 
-\title{RemIX: A Distributed Internet Exchange for Networks in Remote Places
+\title{RemIX: A Distributed Internet Exchange for Remote Access Networks
 % \titlenote{(Produces the permission block, and
 % copyright information). For use with
 % SIG-ALTERNATE.CLS. Supported by ACM.}
@@ -86,7 +87,7 @@
 % without further effort on your part as the last section in
 % the body of your article BEFORE References or any Appendices.
 
-\numberofauthors{6} %  in this sample file, there are a *total*
+\numberofauthors{7} %  in this sample file, there are a *total*
 % of EIGHT authors. SIX appear on the 'first-page' (for formatting
 % reasons) and the remaining two appear in the \additionalauthors section.
 %
@@ -110,16 +111,18 @@
 %        \email{trovato@corporation.com}
 % 2nd. author
  \alignauthor
- Roger Baig
+ James Sweet \\
  \alignauthor
- Peter Buneman \\ %\titlenote{The secretary disavows
+ Roger Baig \\
+ \and
+ \alignauthor
+ Peter Buneman  %\titlenote{The secretary disavows
 % any knowledge of this author's actions.}\\
 %        \affaddr{Institute for Clarity in Documentation}\\
 %        \affaddr{P.O. Box 1212}\\
 %        \affaddr{Dublin, Ohio 43017-6221}\\
 %        \email{webmaster@marysville-ohio.com}
 % % 3rd. author
-\and
  \alignauthor
  Marwan Fayed \\ %\titlenote{This author is the
 % one who did all the really hard work.}\\
@@ -135,18 +138,44 @@
 %        \affaddr{Brookhaven National Lab}\\
 %        \affaddr{P.O. Box 5000}\\
 %        \email{lleipuner@researchlabs.org}
-\alignauthor
-Richard Simmons \\
-%        \affaddr{Brookhaven Laboratories}\\
-%        \affaddr{Brookhaven National Lab}\\
-%        \affaddr{P.O. Box 5000}\\
-%        \email{lleipuner@researchlabs.org}
 }
-
+\additionalauthors{Additional authors: Richard Simmons (The Th{\o}rv{\"a}ld
+Group, email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
+(The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
 
 \maketitle
 \begin{abstract}
+The concept of the Internet Exchange Point\ac{IXP}, a layer-2 fabric central to the structure of the global Internet, is largely absent from the development of community-driven collaborative network infrastructure. The reason for this is dual. \acp{IXP} exist in central, typically urban, environments where strong network infrastructure ensures high levels of connectivity. Between rural and remote regions, where networks are separated by distance, mountains, and sea, no such infrastructure exists. In this paper we present RemIX a distributed \acp{IXP} architecture designed for the community network environment. We examine this praxis using an implementation in Scotland, with suggestions for future development and research.
+
+\begin{comment} %MF-comment
+The concept of the \ac{IXP} is, so central to the
+structure of the global Internet has so far been mostly absent
+from the world of community-driven collaborative network
+infrastructure development. The dual reasons for this are that
+\acp{IXP} typically exist in a central place in an urban area
+and community networks are often in rural and remote places,
+with long distances, mountains and the sea to contend with.
+In this paper we present RemIX a distributed \acp{IXP} 
+architecture designed for the community network environment
+and examine two instances of this praxis in Scotland and
+Catalunya.
+
+
+\par\vspace{\baselineskip}
+\todo[inline]{Below deprecated for now in discussion with RB
+for purposes of abstract submission deadline.}
+Salient differences between HUBS and Guifi:
+\begin{itemize}
+    \item HUBS lacks a centralising structure, a foundation, with an articulated social contract.
+    \item Guifi itself does not provide Internet access
+    \item HUBS is an IP Transit provider
+    \item If anything, Guifi is more like a (larger version of) WHIX
+    \item There is some conflict of interest in HUBS operating WHIX, which Guifi does not suffer from
+\end{itemize}
+\hrule
+
 Rural access networks are designed to bridge the `last-mile' broadband gap in regions that are under-served by traditional broadband providers. Their construction is bespoke, driven by their beneficiaries, and determined by physical landscape, population distribution, and monetary budget. Irrespective of their differences, they are joined by one substantial challenge: connecting to the rest of the Internet is prohibitively expensive. HUBS \textsc{c.i.c} was created in Scotland to respond to this. It is a co-operative of access network members that generates the economies of scale required to afford backhaul and Internet transit. While intermediation at the IP layer between the members and the Internet is required for reasons of scale, it is neither necessary nor desirable amongst the member networks themselves. In urban areas, networks could interconnect with each other at an Internet Exchange Point (IXP). In Scotland where the networks are scattered across 80,000km$^2$ of mountain, field, and sea it is not so easy. We bridge this gap with a design for a distributed Internet exchange for access networks in remote places. Doing so allows for bilateral arrangements for mutual support and assistance between these networks, and increases the resilience of access network connectivity. We present the relevant components, and describe our implementation, so that our efforts may be reproduced. 
+\end{comment} % MF-comment
 \end{abstract}
 
 
@@ -169,17 +198,17 @@ Rural access networks are designed to bridge the `last-mile' broadband gap in re
     \end{tikzpicture}
   }
   \caption{
-  \textbf{Autonomous System topology.} The members of the RemIX in the West
-  Highlands, WHIX form a fully connected network where each may communicate
-  with another over the exchange without intermediation. HUBS is also present
-  and unusually for IXPs will provide Internet transit over the exchange for
-  those members that so require. In practice this is most of them. Note as
+  \textbf{Autonomous System topology.} The members of a RemIX form a fully connected network where each may communicate
+  with another over the exchange without intermediation. Unusually for \acp{IXP} it is common practice to provide Internet transit over the exchange for the vast majority of members that require this. Note as
   well the private interconnection, outwith the exchange, between Skyenet 
-  and Hebnet.
+  and Hebnet. Such private interconnections are typically made as
+  an optimisation where it is not feasible to do so efficiently over the exchange. 
   }
 \end{figure}
 
 \section{WHIX in Scotland} \label{sec:impl} \input{scotland}
+
+\section{Guifi in Catalonia} \label{sec:impl} \input{catalonia}
 
 \section{Concluding Remarks} \label{sec:conc} \input{conc}
 
@@ -190,6 +219,8 @@ Rural access networks are designed to bridge the `last-mile' broadband gap in re
     \end{tikzpicture}
   }
 \end{figure}
+
+\listoftodos
 
 \bibliographystyle{abbrv}
 \bibliography{paper_cix}
