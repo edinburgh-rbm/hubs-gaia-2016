@@ -1,14 +1,13 @@
 latexfile ?= paper_cix
 bibfile = paper_cix
 figures = figs/*
-
+latex = pdflatex -interaction=nonstopmode
 SHELL=/bin/bash
 
 all: $(latexfile).pdf test.pdf
 
-$(latexfile).pdf: *.tex $(figures) whix.sty
-	#pdflatex $(latexfile).tex
-	while (pdflatex $(latexfile).tex; \
+$(latexfile).pdf: $(latexfile).aux $(latexfile).bbl $(figures) whix.sty *.tex
+	while ($(latex) $(latexfile).tex; \
 	grep -q "Rerun to get cross" $(latexfile).log ) do true ; \
 	done
 
@@ -16,7 +15,7 @@ $(latexfile).bbl: $(bibfile).bib $(latexfile).aux
 	bibtex $(latexfile)
 
 $(latexfile).aux: $(latexfile).tex
-	pdflatex $(latexfile).tex
+	$(latex) $(latexfile).tex
 
 test.pdf: test.tex whix.sty
 	pdflatex test.tex

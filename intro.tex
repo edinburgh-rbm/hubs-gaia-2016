@@ -1,21 +1,57 @@
 In remote and rural regions the last-mile problem has been the subject of much
 focus. Worldwide, deployments have shown that it is possible to build quality
 access networks in the remotest regions~\cite{xxx}. Their technological
-foundations range in medium (eg. wired vs wireless), energy (eg. solar,
-mainline), and topology (eg. multi-hop, one-to-many). Successful deployments
-have two attributes in common: (i) Networks designs are bespoke, suggesting
-there is no one-size-fits-all solution; (ii) critically, communites must be
-invested and involved~\cite{Wallace:2015a, Wallace2015b}.
+foundations range in medium (eg. copper or fibre-optic cabling, licensed
+or unlicensed wireless), energy (eg. solar or wind generation or
+mains supplied), and topology (eg. multi-hop,
+one-to-many\narrative{not quite sure what these two mean}). Successful deployments
+have two attributes in common: (i) networks designs are bespoke, suggesting
+there is no one-size-fits-all solution; (ii) communites must be
+invested and involved~\cite{Wallace:2015a, Wallace2015b}. This last is critical.
 
-Much work remains to be done, though the next question is increasingly clear:
-What options does a remote access network have for backhaul, i.e. the
-next-to-last mile, to the Internet? 
+Much work remains to be done on the operation of such networks, but
+the next question is increasingly clear: What options does a remote,
+isolated network have to interconnect with the rest of the Internet?
+``Remote'' means far from urban areas where commodified network
+infrastructure is available and long-distance circuits, where they are
+available, are very expensive. Access networks in remote places serve
+a population that is dispersed, almost by definition, and even in the
+best case such a network will usually not have enough of a userbase on
+its own to pay for a big fat pipe to the nearest city several hundred
+kilometers away\footnote{For exampe, the main case-study of this
+paper, a network on the West Coast of Scotland is 240km from the
+nearest major city that has datacentres and any diversity of network
+infrastructure to speak of.}.
 
-Backhaul availability is highly constrained in remote regions.
-\narrative{economics, expertise; then list projects by facebook and google.}
+\narrative{economics, expertise; then list projects by facebook and
+google. why? what has google or facebook done? if we list them then we
+have to talk about their economic model which is analogous to the
+contribution of the slave trade to the economy of the american south
+in the early 19th century}
 
-In Scotland, we have taken inspiration from Internet Exchange Points. In urban
-regions, IXPs are used. Describe IXPs, and that they are not-for-profit in most
-parts of the world...
+In the development of the Internet, there is a structure that has
+played a pivotal role in facilitating the interconnection of networks
+--- the \acf{IXP}. The role of an \ac{IXP} is primarily economic: if
+you have $n$ networks that should be connected together, that is
+$\frac{n^2}{2}$ circuits that have to be organised between them,
+possibly across many sites. Instead, if these networks agree to meet
+at a single place, only $n$ such circuits need to be organised
+provided that the central place has some sort of neutral, automatic
+multipoint to multipoint switching arrangement. This arrangement is
+called an \ac{IXP} and any network present there is free to make
+arrangements with any other\footnote{One of the authors was a
+participant in early \acp{IXP} that were quite literally just an
+ethernet switch in a convenient place and any network could connect
+under their own steam was welcome for a peppercorn yearly fee.}.
+
+It is unusual today for an \acp{IXP} to be operated by for-profit
+entities and though this was not always the
+case~\cite{Ager:2012:ALE:2342356.2342393,Chatzis:2013:MIM:2541468.2541473,hayes1997computing}, 
+in their modern form they operate as cost centres whose financing is
+the collective concern of their members.
+
+In Scotland, we have taken inspiration from Internet Exchange
+Points. In urban regions, IXPs are used. Describe IXPs, and that they
+are not-for-profit in most parts of the world...
 
 In this paper we present 
