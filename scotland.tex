@@ -1,4 +1,4 @@
-\narrative{In this section we describe CIX as implemented by HUBS, a non-profit etc, etc... Then (1) Particulars of implementation in Scotland and how they were dealth with (if they exist). (2) What the current network looks like, and anticipated changes and/or {\bf unanticipated stuffs, lessons learned}. (3) Outcomes as they exist so far.}
+%\narrative{In this section we describe CIX as implemented by HUBS, a non-profit etc, etc... Then (1) Particulars of implementation in Scotland and how they were dealth with (if they exist). (2) What the current network looks like, and anticipated changes and/or {\bf unanticipated stuffs, lessons learned}. (3) Outcomes as they exist so far.}
 
 We have implemented the RemIX model in the West Highlands where there
 is a cluster of
@@ -21,6 +21,11 @@ area of some 400km$^2$ \narrative{Is this number right?} making the
 construction of an exchange fabric geographically ambitious. It is
 called the \acf{WHIX}.
 
+This project received funding from the Scottish Government, and a
+special-purpose not for profit organisation \ac{WHAN} was created to
+operate the exchange. During its incubation period, it is jointly
+operated by HUBS and the University of Edinburgh.
+
 \subsection{RemIX in Scotland}
 
 The two places in the region where long-distance ethernet circuits are
@@ -33,7 +38,7 @@ exchange point.
 
 From these sites, a series of wireless ethernet circuits connects
 seven other \ac{WHIX} points of presence as shown in
-Figure~\ref{fig:whixmap}.
+Figure~\ref{fig:whixmap}. 
 \begin{figure}[h]
   \resizebox{\linewidth}{!}{
     \begin{tikzpicture}
@@ -48,10 +53,34 @@ Figure~\ref{fig:whixmap}.
   networks. Note in particular how these service areas correspond more 
   closely to maritime features than landforms.
   }
-  \label{whixmap}
+  \label{fig:whixmap}
 \end{figure}
+At each of these points two or more members may connect to the
+exchange. Indeed when deciding whether a particular site should be
+a \ac{WHIX} point of presence the criterion that was settled upon was
+that at least two members must be present there, otherwise a member
+connection would be made remotely.\narrative{clarify}
 
-\narrative{High level view of WHIX, describe circuits, offer sample RfQ}
+To operate the exchange, various network numbers are required. It is
+not appropriate to use private IP addresses~\cite{rfc1918}
+or \acp{ASN}~\cite{rfc6996} for these purposes because of the
+possibility --- likelihood even --- of collision. A member network is
+perfectly entitled to use whichever numbers they like from the
+reserved rage internally for their own use, and if it happens that
+those same numbers are in use on the exchange, or even transitively
+reachable via other exchange members, it creates an ambiguous logical
+topology. This can be especially severe in the case of IP network
+collisions where the duplicate network is learned via external eBGP:
+the path selection algorithm will prefer the foreign path to the local
+one!\footnote{The authors have long wondered about the wisdom of these
+defaults in the path selection algorithm and have never encountered a
+situation where the default behaviour is the desired
+one. Nevertheless, this is what we have.}
+
+Requesting IP address allocations for exchange use from the RIPE NCC
+was straightforward. It did, however, require the formal development
+of rules for connecting to the exchange~\cite{whixrules}. 
+
 
 
 \subsection{Usability 'Trade-off'} \label{subsec:use}

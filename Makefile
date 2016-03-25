@@ -12,6 +12,7 @@ $(latexfile).pdf: $(latexfile).aux $(latexfile).bbl $(figures) whix.sty *.tex
 	done
 
 $(latexfile).bbl: $(bibfile).bib $(latexfile).aux
+	$(latex) $(latexfile)
 	bibtex $(latexfile)
 
 $(latexfile).aux: $(latexfile).tex
