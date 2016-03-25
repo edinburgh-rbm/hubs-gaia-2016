@@ -1,26 +1,97 @@
-In this section we describe the RemIX architecture.
+In this section we present the RemIX architecture. It is instructive to compare with established IXP architectures, and relate those benefits in the context of remote access networks.
 
 \subsection{Design Requirements}
 
-\begin{itemize}
-    \item must behave like ethernet switch for pt to multipt comms 
-    \item IX buildings do exactly this
-    \item how to reproduce remotely?
-\end{itemize}
+Our requirements are shaped by two broad goals: (i) Establish high-quality
+backhaul to remote and difficult to reach regions; (ii) ensure affordability
+for the small access networks it is intended to serve. At national and
+continental scales, IXPs provide exacty these benefits to their ISP clients. Remix must similarly appear, and behave, in a manner that is identical to an IXP.
 
-\todo[inline]{find pt2multipt name from MEF}
+\begin{figure*}
+\centering
+  \subfloat[IXP.]{
+           \includegraphics[width=\columnwidth]
+           {figs/logical_layer2_ixp}
+           \label{subfig:l2ixp}
+  } \hfill
+  \subfloat[RemIX.]{
+           \includegraphics[width=0.9\columnwidth]
+           {figs/logical_layer2_remix}
+           \label{subfig:l2remix}
+  }
+ \caption{A logical layer-2 view of RemIX as compared to an IXP.}
+\label{fig:l2}
+\end{figure*}
 
-\subsection{Required Components}
-\begin{itemize}
-    \item AS number required
-    \item ethernet circuits
-    \item internally BGP (we used VPLS) to allow policies and police activity
-\end{itemize}
+At the center of any exchange point is a switch fabric. We set a logical layer-2
+view of RemIX depicted in Figure~\ref{subfig:l2remix}, against its IXP
+equivalent in Figure~\ref{subfig:l2ixp}. In the IXP, ISPs connect via a switch
+architecture that is hosted within a single physical site. ISPs may install
+their connected router(s) either on- or off-site.
 
+In contrast, as shown in Figure~\ref{subfig:l2remix}, the switch architecture
+itself is distributed over many sites. In addition access network routers sit
+outside of the switch architecture. This separation reflects one of the
+practical constraints that motivate RemIX. Specifically, that space for
+infrastructure in remote regions is absent or problematic. For example, a remote
+port into RemIX is more likely to be housed within a small cabinet, or in a
+space that is donated by a property owner for this purpose. This subtle separation is critical to the RemIX design. 
+
+
+\subsection{RemIX Components}
+
+The RemIX architecture is characterized by three main components, beginning with
+a public Autonomous System (AS) number to facilitate configuration and ensure
+reachability. Subscribers to traditional IXPs are all autonomous systems, with
+their own AS numbers. An IXP, being a logical switch, has no need to expose
+itself as an exchange point. In contrast, remote subscriber access networks may
+be too small to have their own AS numbers, and likely lack the technical
+expertise needed to manage a visible AS. 
+
+Physical connections are made Ethernet circuits. Ethernet circuits are provided
+by telecommunications providers that may or may not themselves be an ISP. The
+circuit characteristics are strongly motivated by the need to generate economies
+of scale. For example, a 20Mbps circuit may be prohibitively expensive for a
+50-subscriber access network, despite being the minimum sufficient capacity. In
+RemIX the remote endpoints of any circuit are resourced to aggregate multiple
+access networks. From our own deployment (Section~\ref{sec:impl}) a sample
+request-for-quote, with physical characteristics, may be found at~\cite{rfq}.
+
+RemIX then uses the circuits to provide an E-LAN service as defined by the Metro
+Ethernet Forum~\cite{mef62}. An E-LAN is a multipoint-to-multipoint Ethernet
+virtual circuit. One circuit is sufficient to start, since a single endpoint can
+connect with many access network interfaces. The underlying technology used to
+enable E-LAN services is left to the implementation. The usability trade-off that emerges is discussed in Section~\ref{subsec:use}.
 
 \subsection{Structural Benefits}
-\begin{itemize}
-    \item provides default transit to Internet (useful because of IP limits - have to be careful about if/how to raise IP issue)
-    \item BGP solves $n^2$ connects, gives bilateral arrangements
-    \item (in our case) BGP is also the foundation of exchange fabric, i.e. pt2pt circuits that mimic ethernet
-\end{itemize}
+
+RemIX is agnostic to the underlying technology used to implement E-LAN service.
+Our implementation uses VPLS with BGP for signalling and
+discovery~\cite{vpls-bgp}. We have found that use of BGP offers a number of
+structural benefits. Topologically, BGP eliminates manual configuration of the
+n$^2$ connections needed mimic an ethernet exchange fabric.
+
+BGP facilitates auto-discovery, and reduces configuration complexity both within
+the exchange fabric, as well as when new subscriber access networks join. This
+is a natural consequence of iBGP's need for a full mesh of iBGP
+sessions\footnote{Route reflectors and confederations also allow the exchange
+fabric to scale.}, within which VPLS configurations can be propogated. In the
+presence of a BGP route server, discovery also extends to Internet transit.
+
+The ability to route in BGP based on policy also allows for bilateral
+arrangements between access networks. For example, neighbouring access networks
+may wish to pool their own network resources, or arrange secondary transit. This
+was an unanticipated benefit that, upon reflection, should have been obvious:
+Remote access networks are ISPs at small scale. Managed by
+autonomous organisations, and driven by the users who subscribe to their
+service, they should be able to decide their own policies.
+
+The RemIX architecture was motivated by our own needs in Scotland. In the next section we present our first-phase implementation of RemIX, alongside remarks on usability and directions for the future.
+
+%\begin{itemize}
+%    \item provides default transit to Internet (useful because of IP 
+%      limits - have to be careful about if/how to raise IP issue)
+%    \item BGP solves $n^2$ connects, gives bilateral arrangements
+%    \item (in our case) BGP is also the foundation of exchange fabric, i.e.
+%      pt2pt circuits that mimic Ethernet
+%\end{itemize}
