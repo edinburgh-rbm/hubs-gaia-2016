@@ -1,18 +1,39 @@
 \narrative{In this section we describe CIX as implemented by HUBS, a non-profit etc, etc... Then (1) Particulars of implementation in Scotland and how they were dealth with (if they exist). (2) What the current network looks like, and anticipated changes and/or {\bf unanticipated stuffs, lessons learned}. (3) Outcomes as they exist so far.}
 
+We have implemented the RemIX model in the West Highlands where there
+is a cluster of
+%%
+%% Mull
+%% Moidart
+%% Small Isles
+%% Knoydart
+%% Sleat
+%% Tegola (experimental, lab)
+%% Tegola (production)
+%% Glenelg
+%% Applecross
+%% CMNet
+%% Lochiel
+%%
+11 small community networks, four of which have a history of
+interconnecting and sharing network resources. They are spread over an
+area of some 400km$^2$ \narrative{Is this number right?} making the
+construction of an exchange fabric geographically ambitious. It is
+called the \acf{WHIX}.
+
 \subsection{RemIX in Scotland}
 
-\narrative{High level view of WHIX, describe circuits, offer sample RfQ}
+The two places in the region where long-distance ethernet circuits are
+available on the mainland are the towns of Mallaig and Kyle of
+Lochalsh. Circuits\footnote{At the time of writing, the circuit from
+Mallaig is in place, and that from Kyle is planned.} from these sites
+connect back to the Pulsant datacentre in Edinburgh to facilitate
+remote peering --- and indeed the provision of Internet access via the
+exchange point.
 
-
-\subsection{Usability 'Trade-off'} \label{subsec:use}
-\narrative{Our use of cheap proprietary vs open batman-compatible}
-
-
-\subsection{Use of SDN}
-\narrative{describe our use of Ansible; also larger implications for SDN}
-
-
+From these sites, a series of wireless ethernet circuits connects
+seven other \ac{WHIX} points of presence as shown in
+Figure~\ref{fig:whixmap}.
 \begin{figure}[h]
   \resizebox{\linewidth}{!}{
     \begin{tikzpicture}
@@ -29,3 +50,15 @@
   }
   \label{whixmap}
 \end{figure}
+
+\narrative{High level view of WHIX, describe circuits, offer sample RfQ}
+
+
+\subsection{Usability 'Trade-off'} \label{subsec:use}
+\narrative{Our use of cheap proprietary vs open batman-compatible}
+
+
+\subsection{Use of SDN}
+\narrative{describe our use of Ansible; also larger implications for SDN}
+
+
