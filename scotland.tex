@@ -44,26 +44,22 @@ correspond more  closely to maritime features than landforms.
 
 %%%%% FIGURE %%%%%
 Figure~\ref{fig:whixmap}.
-\begin{figure}[h]
-  \resizebox{\linewidth}{!}{
+\begin{figure*}
+  \subfloat[Physical topology of the \ac{WHIX} switching fabric.]{
+  \resizebox{!}{0.5\textheight}{
     \begin{tikzpicture}
       \whixphysicaldiagram
     \end{tikzpicture}
-  }
-  \caption{Physical topology of the \acf{WHIX} switch fabric.}
   \label{fig:whixmap}
-\end{figure}
-
-%%%%% FIGURE %%%%%
-\begin{figure}[h]
-  \resizebox{\linewidth}{!}{
+  }
+  \subfloat[\ac{WHIX} connections to subscriber networks; dashed lines correspond to layer-2 circuits forming the logical \ac{WHIX} switching fabric.]{
+  \resizebox{!}{0.5\textheight}{
     \begin{tikzpicture}
       \whixmeshdiagram
     \end{tikzpicture}
   }
-  \caption{WHIX physical layer connections to subscriber networks; dashed lines correspond to layer-2 circuits between WHIX connection sites.}
   \label{fig:phytop}
-\end{figure}
+\end{figure*}
 
 Figure~\ref{fig:whixmap} is an accurate representation of the WHIX fabric as it
 is distributed across the region. To be clear, Figure~\ref{fig:whixmap} \emph{is
