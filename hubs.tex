@@ -1,0 +1,40 @@
+%% Relevant HUBS History
+In 2012-2013 a collaboration took place between the University of
+Stirling and three community networks on the West Coast. They were
+physically neighbouring but were not connected to each other; there
+was no way for them to share resources or provide mutual operational
+support. One had a fast connection via \ac{UHI} but the others could
+make no use of it. Though they were each constructed using similar
+equipment, they were logically organised very differently: one was
+simply a flat layer-2 network, another used static IP routing and the
+third used dynamic routing. It was observed~\cite{waites2014ripe} that
+to connect them together without disturbing their internal structure
+could best be done using \ac{BGP}. And so it was done, to good effect.
+
+At the same time, a similar cluster of community networks was emerging
+in the rural areas to the South of Edinburgh. The proximity to a major
+urban centre presented an opportunity to create a specialist not for
+profit transit provider to cater to their needs. The arrangement up
+North with \ac{UHI} was good but somewhat limiting as institutional
+networks are seldom designed for transit at their periphery. In order
+to have more buying power, the networks wanted to treat with upstream
+providers collectively but no commercial providers had suitable
+products or offerings. So the networks of the South were organised
+together along similar lines as their counterparts in the West
+Highlands, but now with a transit provider of their own. This transit
+provider was called HUBS and it operates \ac{AS} 60241.
+
+Over the course of time, two of the networks in South Scotland began
+to collaborate closely on an operational basis, sharing management and
+troubleshooting tasks for each other's equipment. But their only
+interconnection was mediated by HUBS, which was a hinderance --- they
+did not wish to leak internal details to HUBS but did wish to do so
+between themselves. An ad-hoc solution involving hand-crafted circuits
+was found, but it was obvious that though the capability to have
+bilateral arrangements was very useful, this approach would not scale.
+When financing was obtained to build an upgraded backbone to connect
+the networks on the West Coast --- who now numbered a dozen --- the
+design described herein was developed. The remote networks would be
+able to act collectively in the wholesale telecommunications market
+and yet be able to autonomously make arrangements amongst themselves
+unmediated at the IP layer.
