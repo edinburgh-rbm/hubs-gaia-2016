@@ -41,27 +41,33 @@ space that is donated by a property owner for this purpose. This subtle separati
 \subsection{RemIX Components}
 
 The RemIX architecture is characterized by three main components, beginning with
-a public Autonomous System (AS) number to facilitate configuration and ensure
-reachability. Subscribers to traditional IXPs are all autonomous systems, with
-their own AS numbers. An IXP, being a logical switch, has no need to expose
-itself as an exchange point. In contrast, remote subscriber access networks may
-be too small to have their own AS numbers, and likely lack the technical
-expertise needed to manage a visible AS. 
+a public Autonomous System Number ()\acp{ASN}). Subscribers to traditional IXPs
+are all autonomous systems, with their own AS numbers. An IXP, being a logical
+switch, has no need to expose itself as an exchange point. In contrast, remote
+subscriber access networks may be too small to have their own AS numbers, and
+may lack the technical expertise needed to manage a visible AS. The use of
+public ASNs in RemIX facilitate configuration and ensures reachability. We
+anticipate future RemIX deployments, much like our own in
+Section~\ref{sec:impl}, will also provide transit to the Internet. Due to the
+liklihood of collisions it is inappropriate to use private IP
+addresses~\cite{rfc1918} or \acp{ASN}s~\cite{rfc6996} for these purposes.
 
-Physical connections are made Ethernet circuits. Ethernet circuits are provided
-by telecommunications providers that may or may not themselves be an ISP. The
-circuit characteristics are strongly motivated by the need to generate economies
-of scale. For example, a 20Mbps circuit may be prohibitively expensive for a
-50-subscriber access network, despite being the minimum sufficient capacity. In
-RemIX the remote endpoints of any circuit are resourced to aggregate multiple
-access networks. From our own deployment (Section~\ref{sec:impl}) a sample
-request-for-quote, with physical characteristics, may be found at~\cite{rfq}.
+The second component is a set of physical connections are made Ethernet
+circuits. Ethernet circuits are provided by telecommunications providers that
+may or may not themselves be an ISP. The circuit characteristics are strongly
+motivated by the need to generate economies of scale. For example, a 20Mbps
+circuit may be prohibitively expensive for a 50-subscriber access network,
+despite being the minimum sufficient capacity. In RemIX the remote endpoints of
+any circuit are resourced to aggregate multiple access networks. From our own
+deployment (Section~\ref{sec:impl}) a sample request-for-quote, with physical
+characteristics, may be found at~\cite{rfq}.
 
 RemIX then uses the circuits to provide an E-LAN service as defined by the Metro
 Ethernet Forum~\cite{mef62}. An E-LAN is a multipoint-to-multipoint Ethernet
 virtual circuit. One circuit is sufficient to start, since a single endpoint can
 connect with many access network interfaces. The underlying technology used to
-enable E-LAN services is left to the implementation. The usability trade-off that emerges is discussed in Section~\ref{subsec:use}.
+enable E-LAN services is left to the implementation. The usability trade-off 
+that emerges is discussed in Section~\ref{subsec:use}.
 
 \subsection{Structural Benefits}
 

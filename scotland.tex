@@ -15,18 +15,69 @@ is a cluster of
 %% CMNet
 %% Lochiel
 %%
-11 small community networks, four of which have a history of
-interconnecting and sharing network resources. They are spread over an
-area of some 400km$^2$ \narrative{Is this number right?} making the
-construction of an exchange fabric geographically ambitious. It is
-called the \acf{WHIX}.
+11 small community networks. They are spread over an area of some 400km$^2$
+\narrative{Is this number right?} of sea and mountainous islands, making the
+construction of an exchange fabric geographically ambitious. Four networks have
+a history of interconnecting and sharing network resources, pre-established
+relationships that must be respected in our deployment. 
 
-This project received funding from the Scottish Government, and a
-special-purpose not for profit organisation \ac{WHAN} was created to
-operate the exchange. During its incubation period, it is jointly
-operated by HUBS and the University of Edinburgh.
+The location of our deployment is its namesake, the West Highlands Internet
+Exchange (\acp{WHIX}). In this section WHIX is presented at both logical and
+physical layers, with additional lessons and comments drawn from our experience.
 
-\subsection{RemIX in Scotland}
+
+
+\subsection{West Highlands IX at Layers 1}
+
+The full WHIX physical connectivity is best represented from the two perspectives, depicted across Figures~\ref{fig:whixmap} and~\ref{fig:phytop}. 
+
+In Figure~\ref{fig:whixmap}, the exchange fabric as it appears to WHIX,
+overlayed onto a map of the region. The map itself is stylized for clarity, and
+preserves critical geographical features. Red connected nodes indicate the sites
+at which remote access networks may connect. In a traditional IXP these sites
+would be the ethernet ports into which subscriber ASes plug-in. WHIX sites are
+connected by wirless radio links in black, and leased 100Mbps or 1Gbps circuits
+in orange. The areas enclosed with dotted lines correspond to the service areas
+of member access networks. \narrative{Does this note matter?:} Note in
+particular how these service areas correspond more  closely to maritime features
+than landforms.
+
+%%%%% FIGURE %%%%%
+Figure~\ref{fig:whixmap}. 
+\begin{figure}[h]
+  \resizebox{\linewidth}{!}{
+    \begin{tikzpicture}
+      \whixphysicaldiagram
+    \end{tikzpicture}
+  }
+  \caption{Physical connectivity as it appears in \acf{WHIX}.}
+  \label{fig:whixmap}
+\end{figure}
+
+%%%%% FIGURE %%%%%
+\begin{figure}[h]
+  \resizebox{\linewidth}{!}{
+    \begin{tikzpicture}
+      \whixmeshdiagram
+    \end{tikzpicture}
+  }
+  \caption{WHIX physical layer connectivity. dotted and
+  dashed components are additional wireless links to circumvent geographical
+  obstacles.}  
+  \label{fig:phytop}
+\end{figure}
+
+
+
+Figure~\ref{fig:whixmap} is accurate yet incomplete. In particular the wireless
+radio links in black suggest straightforward line-of-site connections. The
+underlying physical topology is necessarily more complex. It is designed to
+circumvent geographical barriers, while respecting land ownership and local
+by-laws. The complete view of the physical topology appears in
+Figure~\ref{fig:phytop}. In this physical view of Figure~\ref{fig:phytop} the
+solid lines and solid nodes correspond to links and endpoints that appear in the
+exchange fabric (Figure~\ref{fig:whixmap}). The dotted nodes and dashed edges
+represent the additional wireless relays needed to connect the WHIX fabric.
 
 The two places in the region where long-distance ethernet circuits are
 available on the mainland are the towns of Mallaig and Kyle of
@@ -36,30 +87,22 @@ connect back to the Pulsant datacentre in Edinburgh to facilitate
 remote peering --- and indeed the provision of Internet access via the
 exchange point.
 
+
 From these sites, a series of wireless ethernet circuits connects
 seven other \ac{WHIX} points of presence as shown in
-Figure~\ref{fig:whixmap}. 
-\begin{figure}[h]
-  \resizebox{\linewidth}{!}{
-    \begin{tikzpicture}
-      \whixphysicaldiagram
-    \end{tikzpicture}
-  }
-  \caption{
-  Diagram of the \acf{WHIX}. Red markers indicate
-  the sites at which networks may connect, black lines indicate radio
-  links, and orange lines leased 100Mbps or 1Gbps circuits. The areas
-  enclosed with dotted lines correspond to the service areas of member
-  networks. Note in particular how these service areas correspond more 
-  closely to maritime features than landforms.
-  }
-  \label{fig:whixmap}
-\end{figure}
+
+
+
 At each of these points two or more members may connect to the
 exchange. Indeed when deciding whether a particular site should be
 a \ac{WHIX} point of presence the criterion that was settled upon was
 that at least two members must be present there, otherwise a member
 connection would be made remotely.\narrative{clarify}
+
+
+
+
+\subsection{West Highlands IX at Layers 2/3}
 
 To operate the exchange, various network numbers are required. It is
 not appropriate to use private IP addresses~\cite{rfc1918}
@@ -80,6 +123,23 @@ one. Nevertheless, this is what we have.}
 Requesting IP address allocations for exchange use from the RIPE NCC
 was straightforward. It did, however, require the formal development
 of rules for connecting to the exchange~\cite{whixrules}. 
+
+
+%%%%% FIGURE %%%%%
+\begin{figure}[h]
+  \resizebox{\linewidth}{!}{
+    \begin{tikzpicture}
+      \whixtopodiagram
+    \end{tikzpicture}
+  }
+  \caption{
+  \textbf{Autonomous System topology.} The members of a RemIX form a fully connected network where each may communicate
+  with another over the exchange without intermediation. Unusually for \acp{IXP} it is common practice to provide Internet transit over the exchange for the vast majority of members that require this. Note as
+  well the private interconnection, outwith the exchange, between Skyenet 
+  and Hebnet. Such private interconnections are typically made as
+  an optimisation where it is not feasible to do so efficiently over the exchange. 
+  }
+\end{figure}
 
 
 
