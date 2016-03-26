@@ -496,7 +496,7 @@
   \def \nr {\ixnrtr}
 
   \draw[rounded corners=10pt] (-4.25,-4) rectangle(4.25,5);
-  \node at (0,4.25) { \emph{\Large Carrier-neutral datacentre} };
+  \node at (0,4.5) { \emph{\Large Carrier-neutral datacentre} };
   \coordinate (s1a) at (0,0);
   \foreach \r [evaluate={\a={360/(2*\nr) + 360/\nr * (\r - 1)};\b={\a+180}}] in {1,...,\nr} {
     \coordinate (r{\r}a) at (\a:\radius);
@@ -560,6 +560,7 @@
   \def \nr {\ixnrtr}
   \def \ns {8}
 
+  \draw[white!0] (-4.25,-4) rectangle(4.25,-4); %% invisible spacer
   \draw[dotted,switch,very thick,fill=switch!20] (0,0) circle (2.9);
 
   %% switches
