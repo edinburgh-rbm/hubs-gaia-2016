@@ -1,11 +1,25 @@
-In this section we present the RemIX architecture. It is instructive to compare with established IXP architectures, and relate those benefits in the context of remote access networks.
+In this section we present the RemIX architecture. It is instructive
+to compare with established IXP architectures, and relate those
+benefits in the context of remote access networks.
 
 \subsection{Design Requirements}
 
-Our requirements are shaped by two broad goals: (i) Establish high-quality
-backhaul to remote and difficult to reach regions; (ii) ensure affordability
-for the small access networks it is intended to serve. At national and
-continental scales, IXPs provide exacty these benefits to their ISP clients. Remix must similarly appear, and behave, in a manner that is identical to an IXP.
+Our requirements are shaped by three broad goals:
+\begin{inparaenum}[(i)]
+  \item establish high-quality backhaul to remote and difficult to
+    reach regions;
+  \item ensure affordability for the small access networks it is
+    intended to serve;
+  \item enable the networks to maintain the autonomy that is
+    fundamental to their sustainability.
+\end{inparaenum}
+Concretely this means that the member networks must be able to
+efficiently connect to one or more transit providers and at the same
+time continue to make arrangements and articulate policies amongst
+themselves. These requirements mean that a \emph{logical}
+concentration of internetwork connections is desireable on the one
+hand and that there should be a shared switching fabric below the
+network layer on the other.
 
 \begin{figure*}
   \subfloat[Traditional IXP]{
@@ -36,76 +50,100 @@ continental scales, IXPs provide exacty these benefits to their ISP clients. Rem
   \label{fig:ixb}
 \end{figure*}
 
-At the center of any exchange point is a switch fabric. We set a logical layer-2
-view of RemIX depicted in Figure~\ref{subfig:l2remix}, against its IXP
-equivalent in Figure~\ref{subfig:l2ixp}. In the IXP, ISPs connect via a switch
-architecture that is hosted within a single physical site. ISPs may install
-their connected router(s) either on- or off-site.
+If all of the networks were capable of connecting to the same
+location, the design requirements would be met simply with an Ethernet
+switch, not unlike a traditional \ac{IXP} design as in
+Figure~\ref{fig:ixbA}. Since we don't have that luxury, we take the
+contemporary design of a multi-site \ac{IXP} as in
+Figure~\ref{fig:ixbB} and take it to a \emph{maximally distributed}
+extreme---Figure~\ref{fig:ixbC}. A RemIX exchange is distributed so
+that a lightweight point of presence is established where there are as
+little as two members. Members either colocate their border routers
+with the exchange edge switch, or remotely on the far end of a radio
+link as circumstances dictate.
 
-In contrast, as shown in Figure~\ref{subfig:l2remix}, the switch architecture
-itself is distributed over many sites. In addition access network routers sit
-outside of the switch architecture. This separation reflects one of the
-practical constraints that motivate RemIX. Specifically, that space for
-infrastructure in remote regions is absent or problematic. For example, a remote
-port into RemIX is more likely to be housed within a small cabinet, or in a
-space that is donated by a property owner for this purpose. This subtle separation is critical to the RemIX design. 
-
+The RemIX points of presence are \emph{lightweight}. This is
+reflective of the practical constraints that motivate it. Because it
+must be distributed, at each site there are only a handful of networks
+that will connect, so very high port densities are unnecessary. At the
+same time space and power are both at a premium. For example, a remote
+port into RemIX is more likely to be housed within a small cabinet on
+top of a hill, or in a space that is donated by a property owner for
+this purpose. Therefore small and power-efficient equipment must be
+used.
 
 \subsection{RemIX Components}
 
-The RemIX architecture is characterized by three main components, beginning with
-a public Autonomous System Number ()\acp{ASN}). Subscribers to traditional IXPs
-are all autonomous systems, with their own AS numbers. An IXP, being a logical
-switch, has no need to expose itself as an exchange point. In contrast, remote
-subscriber access networks may be too small to have their own AS numbers, and
-may lack the technical expertise needed to manage a visible AS. The use of
-public ASNs in RemIX facilitate configuration and ensures reachability. We
-anticipate future RemIX deployments, much like our own in
-Section~\ref{sec:impl}, will also provide transit to the Internet. Due to the
-liklihood of collisions it is inappropriate to use private IP
-addresses~\cite{rfc1918} or \acp{ASN}s~\cite{rfc6996} for these purposes.
+\subsubsection{Switching Fabric}
+The exchange itself is designed to function like a distributed
+Ethernet switch. This is built upon a variety of
+Ethernet-like links: community fibre, 802.11 wireless, licensed
+wireless, leased fibre, leased pseudo-wires.  There are various
+technical alternatives for how this can be implemented such as
+BGP-VPLS (see Section~\ref{sec:bgpvpls}) or the \textsc{b.a.t.m.a.n}
+protocol but the salient feature is that it functions as a MAC address
+learning Ethernet switch, not unlike the \ac{MEF} E-LAN interface
+specification~\cite{mef62,mefes}.
 
-The second component is a set of physical connections are made Ethernet
-circuits. Ethernet circuits are provided by telecommunications providers that
-may or may not themselves be an ISP. The circuit characteristics are strongly
-motivated by the need to generate economies of scale. For example, a 20Mbps
-circuit may be prohibitively expensive for a 50-subscriber access network,
-despite being the minimum sufficient capacity. In RemIX the remote endpoints of
-any circuit are resourced to aggregate multiple access networks. From our own
-deployment (Section~\ref{sec:impl}) a sample request-for-quote, with physical
-characteristics, may be found at~\cite{rfq}.
+\subsubsection{Member \acp{AS}}
+As an \ac{IXP}, it can be taken as given that the connected networks
+are encapsulated into \acp{AS}. However due to the small size of the
+member networks, the policies are somewhat different from in the
+Internet's so-called \ac{DFZ}. The networks will typically not have
+routers capable of holding the entire Internet routing table, and they
+will not typically announce netblocks large enough to be globally
+visible. Rather, the purpose is \emph{encapsulation} so that each
+network may retain its internal structure and methodologies, and yet
+safely interconnect with its neighbours. Due to the
+liklihood of collisions it is inappropriate to use private
+\acp{ASN}~\cite{rfc6996} for this purpose, nor private IP 
+addresses~\cite{rfc1918} for the exchange itself.
 
-RemIX then uses the circuits to provide an E-LAN service as defined by the Metro
-Ethernet Forum~\cite{mef62}. An E-LAN is a multipoint-to-multipoint Ethernet
-virtual circuit. One circuit is sufficient to start, since a single endpoint can
-connect with many access network interfaces. The underlying technology used to
-enable E-LAN services is left to the implementation. The usability trade-off 
-that emerges is discussed in Section~\ref{subsec:use}.
+\subsubsection{Exchange Transit}
+As the members will often not have sufficient amounts of IP address
+space to be directly visible on the global Internet, an entity 
+can do so must advertise a larger netblock on their behalf. A
+specialised transit provider to mediate between the members and the
+rest of the Internet is needed. The members form a
+\emph{confederation} and the transit provider presents them
+collectively to upstream providers and other exchange points. This is
+an unusual feature: it is normally the exception rather than the rule
+for transit relationships to be implemented over exchange points, but
+here it is normal mode of operation. It should be emphasised that this
+service is optional and no requirement to purchase transit from this
+provider is imposed as a condition for joining the exchange, and
+nothing prevents other such providers from participating.
+
+\subsubsection{Auxilliary Services}
+When member networks connect to the RemIX, they still have to
+configure \ac{BGP} peering amongst themselves. This is a burden
+because the number of such sessions grows as the square of the number
+of participants. To alleviate this, in common with other \acp{IXP}, a
+\emph{route-server} is provided that will repeat announcements
+received from one member to all others. Since \ac{BGP} is perceived as
+a complex, advanced topic in networking, it is very important to keep
+the amount of such configuration to a minimum. Other useful services
+such as \ac{NTP} and looking glasses for assistance in debugging may
+be made available as well.
 
 \subsection{Structural Benefits}
 
-RemIX is agnostic to the underlying technology used to implement E-LAN service.
-Our implementation uses VPLS with BGP for signalling and
-discovery~\cite{vpls-bgp}. We have found that use of BGP offers a number of
-structural benefits. Topologically, BGP eliminates manual configuration of the
-n$^2$ connections needed mimic an ethernet exchange fabric.
+The features of RemIX described above will be instantly recognisable
+to anyone who has participated in a regular \ac{IXP}. This is by
+design, as RemIX is an application of a structure that has allowed the
+Internet to scale to the rural networking environment. Not only does
+encapsulating small community networks in \acp{AS}s mean that they can
+present a uniform interface to a transit provider but also that it is
+possible for them to cooperate and to share resources and yet for each
+to retain the ability to operate their own network as they see
+fit. This is very important because keeping as much of operations and
+maintenance local is the only way they can be sustainable. In turn
+this means that the internal details of each network should suit those
+doing the work and what they are comfortable with.
 
-BGP facilitates auto-discovery, and reduces configuration complexity both within
-the exchange fabric, as well as when new subscriber access networks join. This
-is a natural consequence of iBGP's need for a full mesh of iBGP
-sessions\footnote{Route reflectors and confederations also allow the exchange
-fabric to scale.}, within which VPLS configurations can be propogated. In the
-presence of a BGP route server, discovery also extends to Internet transit.
-
-The ability to route in BGP based on policy also allows for bilateral
-arrangements between access networks. For example, neighbouring access networks
-may wish to pool their own network resources, or arrange secondary transit. This
-was an unanticipated benefit that, upon reflection, should have been obvious:
-Remote access networks are ISPs at small scale. Managed by
-autonomous organisations, and driven by the users who subscribe to their
-service, they should be able to decide their own policies.
-
-The RemIX architecture was motivated by our own needs in Scotland. In the next section we present our first-phase implementation of RemIX, alongside remarks on usability and directions for the future.
+The RemIX architecture was motivated by our own needs in Scotland. In
+the next section we present our first-phase implementation of RemIX,
+alongside remarks on usability and directions for the future.
 
 %\begin{itemize}
 %    \item provides default transit to Internet (useful because of IP 
