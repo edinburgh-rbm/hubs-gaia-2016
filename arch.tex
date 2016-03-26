@@ -8,19 +8,32 @@ for the small access networks it is intended to serve. At national and
 continental scales, IXPs provide exacty these benefits to their ISP clients. Remix must similarly appear, and behave, in a manner that is identical to an IXP.
 
 \begin{figure*}
-\centering
-  \subfloat[IXP.]{
-           \includegraphics[width=\columnwidth]
-           {figs/logical_layer2_ixp}
-           \label{subfig:l2ixp}
+  \subfloat[Traditional IXP]{
+    \resizebox{0.6\columnwidth}{!}{
+      \begin{tikzpicture}
+        \ixboxesA
+      \end{tikzpicture}
+      \label{fig:ixbA}
+    }
   } \hfill
-  %% \subfloat[RemIX.]{
-  %%          \includegraphics[width=0.9\columnwidth]
-  %%          {figs/logical_layer2_remix}
-  %%          \label{subfig:l2remix}
-  %% }
- \caption{A logical layer-2 view of RemIX as compared to an IXP.}
-\label{fig:l2}
+  \subfloat[Modern urban IXP]{
+    \resizebox{0.6\columnwidth}{!}{
+      \begin{tikzpicture}
+        \ixboxesB
+      \end{tikzpicture}
+      \label{fig:ixbB}
+    }
+  } \hfill
+  \subfloat[RemIX]{
+    \resizebox{0.6\columnwidth}{!}{
+      \begin{tikzpicture}
+        \ixboxesC
+      \end{tikzpicture}
+      \label{fig:ixbC}
+    }
+  }
+  \caption{Comparison of exchange point models. Notice density.}
+  \label{fig:ixb}
 \end{figure*}
 
 At the center of any exchange point is a switch fabric. We set a logical layer-2

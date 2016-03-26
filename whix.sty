@@ -1,6 +1,8 @@
 \ProvidesPackage{whix}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
+\RequirePackage{xifthen}
+\usetikzlibrary{network,calc,shapes}
 \definecolor{firebrick}{RGB}{178,34,34}
 \definecolor{forestgreen}{RGB}{31,139,34}
 \definecolor{royalblue}{RGB}{65,105,225}
@@ -456,4 +458,130 @@
   \draw[whixlan] (glb) -- (psg);
 
   \draw[whixlan] (kyl) -- (psg);
+}
+
+\newcommand{\rtr}{\scalebox{0.15}{\router{}}}
+
+\newcommand{\ixboxes}{
+  \begin{scope}[shift={(-9,0)}]
+    \ixboxesA
+  \end{scope}
+  \begin{scope}
+    \ixboxesB
+  \end{scope}
+  \begin{scope}[shift={(9,0)}]
+    \ixboxesC
+  \end{scope}
+}
+
+\def\ixradius{3.5}
+\def\ixnrtr{16}
+
+\newcommand{\ixboxesA}{
+  \def \radius {\ixradius}
+  \def \nr {\ixnrtr}
+
+  \draw[rounded corners=10pt] (-4.25,-4) rectangle(4.25,5);
+  \node at (0,4.25) { \emph{\Large Carrier-neutral datacentre} };
+  \coordinate (s1a) at (0,0);
+  \foreach \r [evaluate={\a={360/(2*\nr) + 360/\nr * (\r - 1)};\b={\a+180}}] in {1,...,\nr} {
+    \coordinate (r{\r}a) at (\a:\radius);
+    \path[longhaul] (r{\r}a) edge (s1a);
+    \node at (r{\r}a) { \rtr };
+  }
+  \node[l3 switch,scale=3] at (s1a) {};
+}
+
+\newcommand{\ixboxesB}{
+  \def \radius {\ixradius}
+  \def \nr {\ixnrtr}
+  \def \ns {2}
+  
+  \draw[rounded corners=10pt] (-4.25,-4) rectangle(4.25,-0.15);
+  \draw[rounded corners=10pt] (-4.25,0.15) rectangle(4.25,4);
+  \draw[rounded corners=10pt,dotted,switch,very thick,fill=switch!30] (-1.25,-2.5) rectangle (1.5,2.75);
+
+  \node at (3,3.5) { \emph{\Large Site 1} };
+  \node at (3,-3.5) { \emph{\Large Site 2} };
+  
+  %% switches
+  \foreach \s [evaluate={\a={360/(2*\ns) + 360/\ns * (\s - 1)}}] in {1,...,\ns} {
+    \coordinate (s{\s}b) at (\a:1.5);
+  }
+  
+  %% full mesh between switches
+  \foreach \p in {1,...,\ns} {
+    \foreach \q in {1,...,\ns} {
+      \ifthenelse{\p < \q}{\draw[longhaul] (s{\p}b) -- (s{\q}b);}{}
+    }
+  }
+
+  %% remote peering
+  \node[net cloud, minimum size=1cm] at (-1,6) { \emph{\Large Remote Peering} };
+  \node (rr1b) at (-1.5, 6.5) { \rtr }; 
+  \node (rr2b) at (-0.5, 5.5) { \rtr };
+  \path[dashed,longhaul] (rr1b) edge[out=180,in=180] (s{1}b);
+  \path[dashed,longhaul] (rr2b) edge[out=0,in=0] (s{2}b);
+
+  %% routers distributed between the switches
+  \foreach \r [evaluate={
+      \a={360/(2*\nr) + 360/\nr * (\r - 1)};\b={\a+180};
+      \s={int((\r - 1) * \ns/\nr + 1)}
+  }] in {1,...,\nr} {
+    \coordinate (r{\r}b) at (\a:\radius);
+    \draw[longhaul] (r{\r}b) -- (s{\s}b);
+    \node at (r{\r}b) { \rtr };
+  }
+  
+  %% draw switch nodes (on top of lines)
+  \foreach \s in {1,...,\ns} {
+    \node[l3 switch,scale=2] at (s{\s}b) {};
+  }
+}
+  
+\newcommand{\ixboxesC}{
+  \def \radius {\ixradius}
+  \def \nr {\ixnrtr}
+  \def \ns {8}
+
+  \draw[dotted,switch,very thick,fill=switch!30] (0,0) circle (2.9);
+
+  %% switches
+  \foreach \s [evaluate={
+      \a={360/(2*\ns) + 360/\ns * (\s - 1)};
+      \b={\a - 360/(2*\ns)};
+      \sr={0.7 * \radius};
+      \pr={0.85 * \radius}
+  }] in {1,...,\ns} {
+%    \node[draw,regular polygon,regular polygon sides=3,minimum
+%      size=3.5cm,rotate=\b,rounded corners=0.5cm] at (\a:\pr) {};
+    \coordinate (s{\s}c) at (\a:\sr);
+  }
+  %% full mesh between switches
+  \foreach \p in {1,...,\ns} {
+    \foreach \q in {1,...,\ns} {
+      \ifthenelse{\p < \q}{\draw[longhaul] (s{\p}c) -- (s{\q}c);}{}
+    }
+  }
+
+  %% remote peering
+  \node[net cloud, minimum size=1cm] at (-1,6) { \emph{\Large Remote Peering} };
+  \node (rr1c) at (-1.5, 6.5) { \rtr }; 
+  \node (rr2c) at (-0.5, 5.5) { \rtr };
+  \path[dashed,longhaul] (rr1c) edge[out=180,in=180] (s{4}c);
+  \path[dashed,longhaul] (rr2c) edge[out=0,in=0] (s{1}c);
+  
+  %% routers distributed between the switches
+  \foreach \r [evaluate={
+      \a={360/(2*\nr) + 360/\nr * (\r - 1)};\b={\a+180};
+      \s={int((\r - 1) * \ns/\nr + 1)}
+  }] in {1,...,\nr} {
+    \coordinate (r{\r}c) at (\a:\radius);
+    \draw[longhaul] (r{\r}c) -- (s{\s}c);
+    \node at (r{\r}c) { \rtr };
+  }
+  %% draw switch nodes (on top of lines)
+  \foreach \s in {1,...,\ns} {
+    \node[l3 switch] at (s{\s}c) {};
+  }
 }
