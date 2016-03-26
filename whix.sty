@@ -510,11 +510,13 @@
   }
   
   %% full mesh between switches
-  \foreach \p in {1,...,\ns} {
-    \foreach \q in {1,...,\ns} {
-      \ifthenelse{\p < \q}{\draw[longhaul] (s{\p}b) -- (s{\q}b);}{}
-    }
-  }
+%  \foreach \p in {1,...,\ns} {
+%    \foreach \q in {1,...,\ns} {
+%      \ifthenelse{\p < \q}{\draw[longhaul] (s{\p}b) -- (s{\q}b);}{}
+%    }
+%  }
+  \path[longhaul] (s{1}b) edge[out=225,in=135] (s{2}b);
+  \path[longhaul] (s{1}b) edge[out=315,in=45] (s{2}b);
 
   %% remote peering
   \node[net cloud, minimum size=1cm] at (-1,6) { \emph{\Large Remote Peering} };
