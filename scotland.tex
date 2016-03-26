@@ -19,38 +19,38 @@ is a cluster of
 \narrative{Is this number right?} of sea and mountainous islands, making the
 construction of an exchange fabric geographically ambitious. Four networks have
 a history of interconnecting and sharing network resources, pre-established
-relationships that must be respected in our deployment. 
+relationships that must be respected in our deployment.
 
 The location of our deployment is its namesake, the West Highlands Internet
-Exchange (\acp{WHIX}). In this section WHIX is presented at both logical and
-physical layers, with additional lessons and comments drawn from our experience.
+Exchange (WHIX). Both logical and physical layers are described, with
+additional lessons and comments drawn from our experience.
 
 
 
-\subsection{West Highlands IX at Layers 1}
+\subsection{West Highlands IX at Layer 1}
 
-The full WHIX physical connectivity is best represented from the two perspectives, depicted across Figures~\ref{fig:whixmap} and~\ref{fig:phytop}. 
+The full WHIX topology is best represented from the two perspectives, depicted
+across Figures~\ref{fig:whixmap} and~\ref{fig:phytop}.
 
-In Figure~\ref{fig:whixmap}, the exchange fabric as it appears to WHIX,
-overlayed onto a map of the region. The map itself is stylized for clarity, and
-preserves critical geographical features. Red connected nodes indicate the sites
-at which remote access networks may connect. In a traditional IXP these sites
-would be the ethernet ports into which subscriber ASes plug-in. WHIX sites are
-connected by wirless radio links in black, and leased 100Mbps or 1Gbps circuits
-in orange. The areas enclosed with dotted lines correspond to the service areas
-of member access networks. \narrative{Does this note matter?:} Note in
-particular how these service areas correspond more  closely to maritime features
-than landforms.
+The physical WHIX fabric is overlayed onto a map of the region in
+Figure~\ref{fig:whixmap}.. The map itself is stylized for clarity, and preserves
+critical geographical features. Red connected nodes indicate the connection
+sites. In a traditional IXP these sites would be the ethernet ports into which
+subscriber ASes plug-in. WHIX sites are connected by wirless radio links in
+black, and leased 100Mbps or 1Gbps circuits in orange. The areas enclosed with
+dotted lines correspond to the visible service areas from each site.
+\narrative{Does this note matter?:} Note in particular how these service areas
+correspond more  closely to maritime features than landforms.
 
 %%%%% FIGURE %%%%%
-Figure~\ref{fig:whixmap}. 
+Figure~\ref{fig:whixmap}.
 \begin{figure}[h]
   \resizebox{\linewidth}{!}{
     \begin{tikzpicture}
       \whixphysicaldiagram
     \end{tikzpicture}
   }
-  \caption{Physical connectivity as it appears in \acf{WHIX}.}
+  \caption{Physical topology of the \acf{WHIX} switch fabric.}
   \label{fig:whixmap}
 \end{figure}
 
@@ -61,23 +61,23 @@ Figure~\ref{fig:whixmap}.
       \whixmeshdiagram
     \end{tikzpicture}
   }
-  \caption{WHIX physical layer connectivity. dotted and
-  dashed components are additional wireless links to circumvent geographical
-  obstacles.}  
+  \caption{WHIX physical layer connections to subscriber networks; dashed lines correspond to layer-2 circuits between WHIX connection sites.}
   \label{fig:phytop}
 \end{figure}
 
-
-
-Figure~\ref{fig:whixmap} is accurate yet incomplete. In particular the wireless
-radio links in black suggest straightforward line-of-site connections. The
-underlying physical topology is necessarily more complex. It is designed to
-circumvent geographical barriers, while respecting land ownership and local
-by-laws. The complete view of the physical topology appears in
-Figure~\ref{fig:phytop}. In this physical view of Figure~\ref{fig:phytop} the
-solid lines and solid nodes correspond to links and endpoints that appear in the
-exchange fabric (Figure~\ref{fig:whixmap}). The dotted nodes and dashed edges
-represent the additional wireless relays needed to connect the WHIX fabric.
+Figure~\ref{fig:whixmap} is an accurate representation of the WHIX fabric as it
+is distributed across the region. To be clear, Figure~\ref{fig:whixmap} \emph{is
+the ethernet switch}. The physical relationship between WHIX and its subscriber
+access networks is shown in Figure~\ref{fig:phytop}.
+%necessarily more complex. It is designed to circumvent geographical barriers,
+%while respecting land ownership and local by-laws.
+In the Figure~\ref{fig:phytop} view of the topology, unlabeled red nodes are the
+connection sites that correspond directly with the red node connection sites in
+Figure~\ref{fig:whixmap}. The dashed lines in Figure~\ref{fig:phytop} are the
+layer-2 WHIX circuits that form a fully connected mesh linking connection sites.
+The solid nodes are the remote access networks labeled with their names. They
+establish and are responsible for links to WHIX sites, represented by the solid
+lines.
 
 The two places in the region where long-distance ethernet circuits are
 available on the mainland are the towns of Mallaig and Kyle of
@@ -122,7 +122,7 @@ one. Nevertheless, this is what we have.}
 
 Requesting IP address allocations for exchange use from the RIPE NCC
 was straightforward. It did, however, require the formal development
-of rules for connecting to the exchange~\cite{whixrules}. 
+of rules for connecting to the exchange~\cite{whixrules}.
 
 
 %%%%% FIGURE %%%%%
@@ -135,9 +135,9 @@ of rules for connecting to the exchange~\cite{whixrules}.
   \caption{
   \textbf{Autonomous System topology.} The members of a RemIX form a fully connected network where each may communicate
   with another over the exchange without intermediation. Unusually for \acp{IXP} it is common practice to provide Internet transit over the exchange for the vast majority of members that require this. Note as
-  well the private interconnection, outwith the exchange, between Skyenet 
+  well the private interconnection, outwith the exchange, between Skyenet
   and Hebnet. Such private interconnections are typically made as
-  an optimisation where it is not feasible to do so efficiently over the exchange. 
+  an optimisation where it is not feasible to do so efficiently over the exchange.
   }
 \end{figure}
 
@@ -149,5 +149,3 @@ of rules for connecting to the exchange~\cite{whixrules}.
 
 \subsection{Use of SDN}
 \narrative{describe our use of Ansible; also larger implications for SDN}
-
-
