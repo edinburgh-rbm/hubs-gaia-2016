@@ -45,20 +45,29 @@ correspond more  closely to maritime features than landforms.
 %%%%% FIGURE %%%%%
 Figure~\ref{fig:whixmap}.
 \begin{figure*}
-  \subfloat[Physical topology of the \ac{WHIX} switching fabric.]{
-  \resizebox{!}{0.5\textheight}{
-    \begin{tikzpicture}
-      \whixphysicaldiagram
-    \end{tikzpicture}
-  \label{fig:whixmap}
+  \centering
+  \subfloat[Physical topology of \ac{WHIX}.]{
+    \resizebox{0.9\columnwidth}{0.4\textheight}{
+      \begin{tikzpicture}
+        \whixphysicaldiagram
+      \end{tikzpicture}
+    }
+    \label{fig:whixmap}
+  }\hspace{\columnsep}
+  \subfloat[Subscriber connections to \ac{WHIX}]{
+    \resizebox{0.9\columnwidth}{0.4\textheight}{
+      \begin{tikzpicture}
+        \whixmeshdiagram
+      \end{tikzpicture}
+     }
+    \label{fig:phytop}
   }
-  \subfloat[\ac{WHIX} connections to subscriber networks; dashed lines correspond to layer-2 circuits forming the logical \ac{WHIX} switching fabric.]{
-  \resizebox{!}{0.5\textheight}{
-    \begin{tikzpicture}
-      \whixmeshdiagram
-    \end{tikzpicture}
-  }
-  \label{fig:phytop}
+  \caption{Physical and logical layout of \ac{WHIX}. In
+  Figure~\ref{fig:whixmap} the dark lines correspond to radio links
+  and the light, curved lines to leased ethernet circuits.
+  In Figure~\ref{fig:phytop} the dashed lines
+  correspond to internal layer-2 circuits forming \ac{WHIX}
+  switching fabric and the solid lines to member connections.}
 \end{figure*}
 
 Figure~\ref{fig:whixmap} is an accurate representation of the WHIX fabric as it
