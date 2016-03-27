@@ -15,8 +15,9 @@ is a cluster of
 %% CMNet
 %% Lochiel
 %%
-11 small community networks. Their spread across \textasciitilde 400km$^2$
-\narrative{Is this number right?} of sea and mountainous islands makes the
+11 small community networks. Their spread across \textasciitilde 2000km$^2$
+%% source -- 100km long by 20km wide
+of sea and mountainous islands makes the
 construction of an exchange fabric geographically ambitious. Four networks have
 a history of interconnecting and sharing network resources, pre-established
 relationships that must be respected in our deployment.
@@ -25,23 +26,16 @@ Our deployment's location is its namesake, the West Highlands Internet
 Exchange (WHIX). Both logical and physical layers are described below, with
 additional lessons and comments drawn from our experience.
 
+\subsection{West Highland IX at Layer 1}
 
-
-\subsection{West Highlands IX at Layer 1}
-
-The full WHIX topology is best represented from the two perspectives, depicted
-across Figures~\ref{fig:whixmap} and~\ref{fig:phytop}.
-
-The physical WHIX fabric is overlayed onto a map of the region in
-Figure~\ref{fig:whixmap}.. The map itself is stylized for clarity, and preserves
-critical geographical features. Red connected nodes indicate the connection
-sites. In a traditional IXP these sites would be the ethernet ports into which
-subscriber ASes plug-in. WHIX sites are connected by wirless radio links in
-black, and leased 100Mbps or 1Gbps circuits in orange. The areas enclosed with
-dotted lines correspond to the visible service areas from each site.
-\narrative{Does this note matter?:} Note in particular how these service areas
-correspond more  closely to maritime features than landforms.
-
+The physical \ac{WHIX} fabric is overlayed onto a map of the region in
+Figure~\ref{fig:whixmap}. The map itself is stylized for clarity, and
+preserves critical geographical features. Red connected nodes indicate
+the connection sites. In a traditional IXP these sites would be the
+ethernet ports into which subscriber ASes plug-in. WHIX sites are
+connected by wirless radio links in black, and leased 100Mbps or 1Gbps
+circuits in orange. The areas enclosed with dotted lines correspond to
+the service areas from each member network.
 %%%%% FIGURE %%%%%
 Figure~\ref{fig:whixmap}.
 \begin{figure*}
@@ -70,19 +64,11 @@ Figure~\ref{fig:whixmap}.
   switching fabric and the solid lines to member connections.}
 \end{figure*}
 
-Figure~\ref{fig:whixmap} is an accurate representation of the WHIX fabric as it
-is distributed across the region. To be clear, Figure~\ref{fig:whixmap} \emph{is
-the ethernet switch}. The physical relationship between WHIX and its subscriber
-access networks is shown in Figure~\ref{fig:phytop}.
-%necessarily more complex. It is designed to circumvent geographical barriers,
-%while respecting land ownership and local by-laws.
-In the Figure~\ref{fig:phytop} view of the topology, unlabeled red nodes are the
-connection sites that correspond directly with the red node connection sites in
-Figure~\ref{fig:whixmap}. The dashed lines in Figure~\ref{fig:phytop} are the
-layer-2 WHIX circuits that form a fully connected mesh linking connection sites.
-The solid nodes are the remote access networks labeled with their names. They
-establish and are responsible for links to WHIX sites, represented by the solid
-lines.
+Where Figure~\ref{fig:whixmap} representats the physical topology
+of \ac{WHIX} itself, Figure~\ref{fig:phytop} shows the member network
+connections. In the latter, unlabeled red nodes are the \ac{WHIX}
+points of presence and the dashed lines represent the fully connected
+virtual topology that implements the exchange E-LAN.
 
 The two places in the region where long-distance ethernet circuits are
 available on the mainland are the towns of Mallaig and Kyle of
@@ -92,22 +78,15 @@ connect back to the Pulsant datacentre in Edinburgh to facilitate
 remote peering --- and indeed the provision of Internet access via the
 exchange point.
 
+The radio links are implemented with equipment from Ubiquiti Networks,
+configured in transparent bridge mode so that they can be considered
+simply as Ethernet from a functional perspective. The switching fabric
+itself at each of \ac{WHIX} points of presence is implemented with
+Mikrotik routers. This choice was made on the grounds of their
+moderate port density, low power consumption, low cost, and adequately
+featureful \ac{MPLS} implementation, of which more below.
 
-From these sites, a series of wireless ethernet circuits connects
-seven other \ac{WHIX} points of presence as shown in
-
-
-
-At each of these points two or more members may connect to the
-exchange. Indeed when deciding whether a particular site should be
-a \ac{WHIX} point of presence the criterion that was settled upon was
-that at least two members must be present there, otherwise a member
-connection would be made remotely.\narrative{clarify}
-
-
-
-
-\subsection{West Highlands IX at Layers 2/3}
+\subsection{West Highland IX at Layers 2/3}
 
 To operate the exchange, various network numbers are required. It is
 not appropriate to use private IP addresses~\cite{rfc1918}
