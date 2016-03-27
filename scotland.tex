@@ -131,5 +131,31 @@ of rules for connecting to the exchange~\cite{whixrules}.
 \narrative{Our use of cheap proprietary vs open batman-compatible}
 
 
-\subsection{Use of SDN}
-\narrative{describe our use of Ansible; also larger implications for SDN}
+\subsection{Deployment Discussion}
+
+Our experience motivates higher-level comments to further distinguish RemIX
+deployments form their larger \ac{IXP} and \ac{NAP} cousins. Flat networks
+consisting of a single layer-2 broadcast domain can be plagued by difficult to
+troubleshoot problems. By its very design RemIX requires that members be able to
+communicate directly without mediation at the IP layer. This similarity is
+superficial. RemIX eliminates a large class of potential problems by allowing
+only unicast and \ac{ARP} traffic on the exchange. Moreover, members must
+nominate a specific \ac{MAC} address for their connections, which reduces the
+risk of loops and broadcast storms. We also adopt \ac{IXP} best practices such
+as quarantines for new connections while they are evaluated for correctness.
+
+% Many working network engineers have had the experience of inheriting a flat
+% network consisting of a single layer-2 broadcast domain, invariably plagued by
+% difficult to troubleshoot problems.
+
+% The architecture is such that the extension of the layer-2 broadcast domain
+% extends far enough to meet the design requirements but not so far as to become
+% unwieldy.
+
+The RemIX norm of providing IP transit also deserves to be addressed. Transit
+via the exchange, for networks that are not otherwise visible on the Internet,
+may evoke notions of conflicting interests that beset \acp{NAP}.  With regards
+to our Scottish deployments the similarity is superficial. Our transit provider,
+HUBS CiC, is a cooperative that exists for the benefit of its members. In our
+deployment, HUBS provides service only to member networks and never to
+end-users. As a consequence all parties' economic interests are aligned.

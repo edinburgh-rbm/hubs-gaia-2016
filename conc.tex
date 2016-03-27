@@ -11,31 +11,3 @@ fit. This is very important because keeping as much of operations and
 maintenance local is the only way they can be sustainable. In turn
 this means that the internal details of each network should suit those
 doing the work and what they are comfortable with.
-
-Many working network engineers have had the experience of inheriting a
-flat network consisting of a single layer-2 broadcast domain,
-invariably plagued by difficult to troubleshoot problems. There is a
-superficial similarity to the RemIX architecture, after all it is a
-design requirement that members of the \ac{IXP} must be able to
-communicate directly without mediation at the IP layer. The similarity
-is only superficial, however. Firstly only unicast traffic and
-\ac{ARP} is permitted on the exchange \ac{LAN} and this policy,
-provided it is enforced, eliminates a large class of potential
-problems. Secondly, the requirement that members nominate a specific
-\ac{MAC} address for their connection reduces the risk of loops and
-broadcast storms. Best practices learned from larger \acp{IXP} such as
-quarantine for a new connection until it is shown to be behaving
-correctly are valuable for mitigating these risks. The architecture is
-such that the extension of the layer-2 broadcast domain extends far
-enough to meet the design requirements but not so far as to become
-unwieldy.
-
-A high-level criticism that could be directed at the norm of providing
-IP transit via the exchange for networks that are not otherwise
-visible on the Internet is that it evokes the conflicting interests
-that beset the \acp{NAP}. Here too, the similarity is superficial. The
-major difference, at least in the Scottish implementation, is that the
-transit provider is a cooperative that exists for the benefit of its
-members. It does not compete with its members because it does not
-provide service to individual end-users, so the economic interests are
-aligned and there is no conflict.
