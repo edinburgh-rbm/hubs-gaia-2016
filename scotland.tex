@@ -131,10 +131,20 @@ that members do not themselves create bridge loops via their own
 network so a \ac{MAC} address filter on the port is employed.
 
 \subsection{West Highland IX at Layer 3}
-Requesting IP address allocations for exchange use from the RIPE NCC
-was straightforward. It did, however, require the formal development
-of rules for connecting to the exchange~\cite{whixrules}.
 
+Logical connectivity being established between all member ports, it is
+necessary to assign IP addresses to their border routers and public
+exchange infrastructure such as the route server. As mentioned above
+the use of private IP address space for this purpose is undesireable
+due to the possibility of collisions with members' own
+infrastructure. Fortunately by design, \ac{WHIX} meets the definition
+of an \ac{IXP}~\cite{ripe451,whixrules} and allocations of IPv4 and
+IPv6 addresses were obtained from the RIPE NCC~\cite{ripe649}.
+
+Each member network now has everything they need: the ability to
+communicate at layer 2 with each other, an IP address for layer 3, an
+autonomous system number to identify themselves, and their own
+networks to announce.
 %%%%% FIGURE %%%%%
 \begin{figure}[h]
   \resizebox{\linewidth}{!}{
@@ -143,14 +153,30 @@ of rules for connecting to the exchange~\cite{whixrules}.
     \end{tikzpicture}
   }
   \caption{
-  \textbf{Autonomous System topology.} The members of a RemIX form a fully connected network where each may communicate
-  with another over the exchange without intermediation. Unusually for \acp{IXP} it is common practice to provide Internet transit over the exchange for the vast majority of members that require this. Note as
-  well the private interconnection, outwith the exchange, between Skyenet
-  and Hebnet. Such private interconnections are typically made as
-  an optimisation where it is not feasible to do so efficiently over the exchange.
-  }
+  Autonomous System topology. The members of a RemIX form a fully
+  connected network where each may communicate with another over the
+  exchange without intermediation. Unusually for \acp{IXP} it is
+  common practice to provide Internet transit over the exchange for
+  the vast majority of members that require this. Note as well the
+  private interconnection, outwith the exchange, between Skyenet and
+  Hebnet. Such private interconnections are typically made as an
+  optimisation where it is not feasible to do so efficiently over the
+  exchange.}
 \end{figure}
+So that they don't need to explicitly configure bilateral peering
+relationships among each other (another $n^2$ configuration
+task), \ac{WHIX} provides two route-servers, again at Mallaig and
+Sabhal M\`{o}r Ostaig to redistribute reachability information. A
+route-server behaves like a route-reflector except that it does not
+insert its own \ac{ASN} into the path.
 
+HUBS is also present at \ac{WHIX} as a member, but in addition to
+public multilateral peering, it establishes bilateral sessions with
+those members that wish where it will announce either a default route
+or full Internet routing tables and will forward member's
+announcements to its other peers and upstreams. In this way transit
+and so connectivity to the global Internet is provided over the
+exchange.
 %\subsection{Usability 'Trade-off'} \label{subsec:use}
 %\narrative{Our use of cheap proprietary vs open batman-compatible}
 
