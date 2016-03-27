@@ -2,7 +2,7 @@
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{xifthen}
-\usetikzlibrary{network,calc,shapes}
+\usetikzlibrary{network,calc,shapes,decorations}
 \definecolor{firebrick}{RGB}{178,34,34}
 \definecolor{forestgreen}{RGB}{31,139,34}
 \definecolor{royalblue}{RGB}{65,105,225}
@@ -27,6 +27,59 @@
 
 %\tikzset{toponode/.style = {draw,circle,fill=white}}
 \tikzset{toponode/.style = {net cloud,very thin}}
+
+%%
+%% discontinuous line style from
+%% https://tex.stackexchange.com/questions/22370/tikz-how-to-draw-an-interrupted-line
+%%
+\pgfdeclaredecoration{discontinuity}{start}{
+  \state{start}[width=0.5\pgfdecoratedinputsegmentremainingdistance-0.5\pgfdecorationsegmentlength,next state=first wave]
+  {}
+  \state{first wave}[width=\pgfdecorationsegmentlength, next state=second wave]
+  {
+    \pgfpathlineto{\pgfpointorigin}
+    \pgfpathmoveto{\pgfqpoint{0pt}{\pgfdecorationsegmentamplitude}}
+    \pgfpathcurveto
+        {\pgfpoint{-0.25*\pgfmetadecorationsegmentlength}{0.75\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{-0.25*\pgfmetadecorationsegmentlength}{0.25\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{0pt}{0pt}}
+    \pgfpathcurveto
+        {\pgfpoint{0.25*\pgfmetadecorationsegmentlength}{-0.25\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{0.25*\pgfmetadecorationsegmentlength}{-0.75\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{0pt}{-\pgfdecorationsegmentamplitude}}
+  }
+  \state{second wave}[width=0pt, next state=do nothing]
+  {
+    \pgfpathmoveto{\pgfqpoint{0pt}{\pgfdecorationsegmentamplitude}}
+    \pgfpathcurveto
+        {\pgfpoint{-0.25*\pgfmetadecorationsegmentlength}{0.75\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{-0.25*\pgfmetadecorationsegmentlength}{0.25\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{0pt}{0pt}}
+    \pgfpathcurveto
+        {\pgfpoint{0.25*\pgfmetadecorationsegmentlength}{-0.25\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{0.25*\pgfmetadecorationsegmentlength}{-0.75\pgfdecorationsegmentamplitude}}
+        {\pgfpoint{0pt}{-\pgfdecorationsegmentamplitude}}
+    \pgfpathmoveto{\pgfpointorigin}
+  }
+  \state{do nothing}[width=\pgfdecorationsegmentlength,next state=do nothing]{
+    \pgfpathlineto{\pgfpointdecoratedinputsegmentlast}
+  }
+  \state{final}
+  {
+    \pgfpathlineto{\pgfpointdecoratedpathlast}
+  }
+}
+
+\tikzset{edi/.style={
+    decoration={%
+      discontinuity,
+      amplitude=0.5cm,
+      segment length=0.25cm,
+      meta-segment length=0.5cm
+    },
+%    decorate
+  }
+}
 
 %%
 %% put together a physical diagram
@@ -307,8 +360,8 @@
 }
 
 \newcommand{\whixlonghaul}{
-  \path[whixlink,longhaul] (kyl) edge [out=0,in=90] (psg);
-  \path[whixlink,longhaul] (mhs) edge [out=330,in=180] (psg);
+  \path[whixlink,longhaul] (kyl) edge[edi,out=0,in=90] (psg);
+  \path[whixlink,longhaul] (mhs) edge[edi,out=330,in=180] (psg);
 }
 
 %%
