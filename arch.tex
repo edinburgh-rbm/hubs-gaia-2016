@@ -84,10 +84,13 @@ power-efficient.
 The exchange itself is designed to mimic a distributed Ethernet switch. Multiple
 Ethernet-like link options include fibre, 802.11 wireless, licensed wireless,
 leased fibre, leased pseudo-wires. The switching fabric may be implemented on
-top using BGP-VPLS~\cite{rfc4761} (as we have in Section~\ref{sec:bgpvpls}) or
-the \textsc{b.a.t.m.a.n}~\cite{johnson2008simple} protocol. The salient feature
-between them is MAC address learning to establish an Ethernet switch similar to
-the \ac{MEF} E-LAN interface specification~\cite{mef62,mefes}.
+top using BGP-VPLS~\cite{rfc4761} (as we have in
+Section~\ref{sec:bgpvpls}) or the
+\acs{BATMAN}~\cite{johnson2008simple} or
+\acs{TRILL}~\cite{perlman2004rbridges} protocols. The salient feature
+between them is MAC address learning to establish an Ethernet switch
+similar to the \ac{MEF} E-LAN interface
+specification~\cite{mef62,mefes}.
 
 \subsubsection{Member \acp{AS}}
 
