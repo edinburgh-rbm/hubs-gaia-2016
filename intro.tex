@@ -35,7 +35,7 @@ The absence of resource pooling options for remote networks is the focus of this
 paper. The \acf{IXP} is a structure
 that plays a pivotal role in facilitating interconnection between
 networks~\cite{Ager::2012}. We are motivated by \acp{IXP} for two reasons.
-First, the primary role of an \ac{IXP} is economic. Client subscribers can
+First, the primary role of an \ac{IXP} is economic. Member networks can
 connect $n$ networks at an IXP with $n$ circuits, rather than arranging for
 $\frac{n^2}{2}$ circuits independently. Second, the \ac{IXP} model of
 multilateral public peering leads to high density interconnections, and traffic
@@ -47,11 +47,11 @@ affordable.
 In this paper we describe RemIX, a \emph{distributed} Internet Exchange for
 Remote access networks. The RemIX architecture distinguishes itself from \acp{IXP}
  by vast distances between points of presence, and the lower density
-of subscriber networks that connect to them. RemIX also embeds the same
+of member networks that connect to them. RemIX also embeds the same
 principles as the successful remote networks it is designed to serve.
 At physical layers the RemIX switching fabric is agnostic to technology and
 topology, which allows for bespoke networks. Crucially, at layer-2 RemIX
-establishes a relationship with and between its subscriber networks.
+establishes a relationship with and between its member networks.
 
 In the following we describe the environment in which the  RemIX architecture operates, the details of RemIX and   WHIX, the first deployment of RemIX  in Scotland.
 
