@@ -11,12 +11,3 @@ fit. This is very important because keeping as much of operations and
 maintenance local is the only way they can be sustainable. In turn
 this means that the internal details of each network should suit those
 doing the work and what they are comfortable with.
-
-A benefit of \ac{WHIX}' implementation choice of \ac{BGP}-\ac{VPLS}
-for making the exchange fabric is that it is easy to offer auxilliary
-point to point pseudo-wire services to its members. This is especially
-useful for those networks who, for one reason or another, have need of
-such a service for making connections \emph{internal} to their
-networks. This is as simple as creating a distinct route target
-bridged to two of their ports which results in the establishment of a
-dedicated~\ac{VPLS} instance for them.
