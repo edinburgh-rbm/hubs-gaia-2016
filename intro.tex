@@ -4,79 +4,57 @@ access networks in the remotest regions~\cite{xxx}. Their technological
 foundations range in medium (eg. copper or fibre-optic cabling, licensed
 or unlicensed wireless), energy (eg. solar or wind generation or
 mains supplied), and topology (eg. multi-hop,
-one-to-many\narrative{not quite sure what these two mean}). Successful deployments
+one-to-many\narrative{not quite sure what these two mean}). Successful deployments, including our own in Scotland,
 have two attributes in common:
 \begin{inparaenum}[(i)]
-  \item networks designs are bespoke, suggesting
+  \item Networks designs are bespoke, suggesting
     there is no one-size-fits-all solution;
-  \item communites must be invested and involved~\cite{Wallace:2015a,
+  \item curcially, communities must be invested and
+  involved~\cite{Wallace:2015a,
     Wallace2015b}.
 \end{inparaenum}
-This last is critical.
 
-Much work remains to be done on the operation of such networks, but
-the next question is increasingly clear: What options does a remote,
-isolated network have to interconnect with the rest of the Internet?
-``Remote'' means far from urban areas where commodified network
-infrastructure is available and long-distance circuits, where they are
-available, are very expensive. Access networks in remote places serve
-a population that is dispersed, almost by definition, and even in the
-best case such a network will usually not have enough of a userbase on
-its own to pay for a big fat pipe to the nearest city several hundred
-kilometers away\footnote{For example, the main case-study of this
-paper, a network on the West Coast of Scotland is 240km from the
-nearest major city that has datacentres and any diversity of network
-infrastructure to speak of.}.
+Though remote access networks' research is far from complete, the next question
+is increasingly clear: What options does a remote, isolated network have for
+`backhaul' to interconnect with the rest of the Internet? ``Remote'' means far
+from urban areas where commodified network infrastructure is available and
+long-distance circuits, where they are available, are very expensive. Access
+networks in remote places serve a population that is dispersed. The lower
+population density reduces the size of their user-base when compared to their
+urban cousins. This makes \emph{high-quality} backhaul connectivity
+prohibitively expensive, if it exists at all. with no options for
+interconnecting with nearby networks to generate economies of scale.
 
-In the development of the Internet, there is a structure that has
-played a pivotal role in facilitating the interconnection of networks
---- the \acf{IXP}. As part of the decommissioning of the \ac{NSFNET}
-in the early-mid 1990s, four \acp{NAP} were created, each operated by
-a large American telephone company (MCI, Sprint, PacBell, Ameritech)
-to help ensure that the fledgeling commercial Internet did not suffer
-a
-partition~\cite{hayes1997computing,Ager:2012:ALE:2342356.2342393}. Being
-operated by vested interests, the barriers to participation at
-the \acp{NAP} were high in terms of cost and equipment. As an
-alternative, \acp{IXP} began to appear in carrier-neutral
-facilities. The networking community recognised that mutual
-interconnections were desireable and that the function of
-the \acp{NAP} was a necessary one, but that they ought not to be
-operated by carriers because of the conflicts of interest that
-inevitably arose\footnote{One of the authors was a participant in
-early \acp{IXP} that were quite literally just an ethernet switch in a
-convenient place and any network could connect under their own steam
-was welcome for a peppercorn yearly fee.}. There are now several
-hundred such \acp{IXP} around the world.
+% , almost by definition, and even in the best case such a network will usually
+% not have enough of with a userbase  to the nearest city several hundred
+% kilometers away\footnote{For example, the main case-study of this paper, a
+% network on the West Coast of Scotland is 240km from the nearest major city that
+% has datacentres and any diversity of network infrastructure to speak of.}.
 
-The role of an \ac{IXP} is primarily economic: if
-you have $n$ networks that should be connected together, that is
-$\frac{n^2}{2}$ circuits that have to be organised between them,
-possibly across many sites. Instead, if these networks agree to meet
-at a single place, only $n$ such circuits need to be organised
-provided that the central place has some sort of neutral, automatic
-multipoint to multipoint switching arrangement. This arrangement is
-called an \ac{IXP} and any network present there is free to make
-arrangements with any other. To avoid the kinds of conflicts of
-interest mentioned above, \acp{IXP} are typically organised as a not
-for profit entity, and treated as a cost-centre by its members.
+The absence of resource pooling options for remote networks is the focus of this
+paper. In the Internet, the Internet Exchange Point (\acf{IXP}) is a structure
+that plays a pivotal role in facilitating interconnection between
+networks~\cite{Ager::2012}. We are motivated by \acp{IXP} for two reasons.
+First, the primary role of an \ac{IXP} is economic. Client subscribers can
+connect $n$ networks at an IXP with $n$ circuits, rather than arranging for
+$\frac{n^2}{2}$ circuits independently. Second, the \ac{IXP} model of
+multilateral public peering leads to high density interconnections, and traffic
+across the exchange that can be comparable in magnitude to the largest global
+service providers~\cite{Ager:2012:ALE:2342356.2342393}. Mirroring this effect in
+remote regions could generate economies of scale required that makes backhaul
+affordable.
 
-This model of multilateral public peering leads to a very high
-density of interconnection and traffic flux across the exchange that
-in some cases is comparable in magnitude to the largest global
-service providers~\cite{Ager:2012:ALE:2342356.2342393}. This
-observation is the first indication that such a topology might be
-useful for bringing together several remote networks in order that
-this increased density of interconnection can be used to pool traffic
-to make collective use of expensive resources such as long-distance
-circuits. There are some important differences between the environment
-of typical \acp{IXP} and that on the West Coast of Scotland:
-\begin{inparaenum}[(i)]
-  \item there are no data centres there, carrier-neutral or otherwise;
-  \item due to geography there is no single place where all of the
-    networks could meet.
-\end{inparaenum}
+In this paper we present RemIX, a \emph{distributed} Internet Exchange for
+Remote access networks. The RemIX architecture distinguishes itself from IXPs,
+principally, by vast distances between points of presence, and the lower density
+of subscriber networks that connect via those points. RemIX also embeds the same
+principle attributes as the successful remote networks it is designed to serve.
+At physical layers the RemIX switching fabric is agnostic to technology and
+topology, which allows for bespoke networks. Crucially, at layer-2 RemIX
+establishes a relationship with and between its subscriber networks.
 
-In this paper we present 
+We have instantiated the RemIX architecture with WHIX, the first of many RemIX deployments planned for Scotland...
+
+
 
 \todo[inline]{What do we present???}
