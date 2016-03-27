@@ -21,6 +21,14 @@
 \usepackage{todonotes}
 \newcommand{\narrative}[1]{\textcolor{blue}{(narrative: #1)}}
 
+%%MF -- To put all authors on front page, and save space.
+\newcommand{\superscript}[1]{\ensuremath{^{\mathrm{#1}}}}
+%\def\sharedaffiliation{\end{tabular}\newline\begin{tabular}{c}}
+\def\we{\superscript{*}}
+\def\wg{\superscript{\dag}}
+\def\wh{\superscript{\ddag}}
+\def\ws{\superscript{\natural}}
+
 \begin{document}
 
 % % Copyright
@@ -105,12 +113,10 @@
 %
 % 1st. author
  \alignauthor
- William Waites, James Sweet, Roger Baig, Peter Buneman,\\
- Marwan Fayed, Michael Fourman, Richard Simmons \\
- \affaddr{UofE}\\
- \affaddr{HUBS}\\
- \affaddr{Guifi.net}\\
- \affaddr{UofS}
+ William Waites\we, James Sweet\wh, Roger Baig\wg, Peter Buneman\we,\\
+ Marwan Fayed\ws, Michael Fourman\we, Richard Simmons\ws \\
+ \affaddr{{\we}University of Edinburgh, {\wh} HUBS CiC, {\wg}guifi.net, {\ws}University of Stirling}\\
+ \email{\{ww,opb,mfourman\}@inf.ed.ac.uk, james@hubs.net.uk, roger.baig@guifi.net, mmf@cs.stir.ac.uk, r.a.simmons@stir.ac.uk}
 %  William Waites \\ %\titlenote{Dr.~Trovato insisted his name be first.}\\
 % %        \affaddr{Institute for Clarity in Documentation}\\
 % %        \affaddr{1932 Wallamaloo Lane}\\
