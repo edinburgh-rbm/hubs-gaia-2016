@@ -80,74 +80,58 @@ power-efficient.
 \subsection{RemIX Components}
 
 \subsubsection{Switching Fabric}
-The exchange itself is designed to function like a distributed
-Ethernet switch. This is built upon a variety of
-Ethernet-like links: community fibre, 802.11 wireless, licensed
-wireless, leased fibre, leased pseudo-wires.  There are various
-technical alternatives for how this can be implemented such as
-BGP-VPLS~\cite{rfc4761} (see Section~\ref{sec:bgpvpls}) or the
-\textsc{b.a.t.m.a.n}~\cite{johnson2008simple}
-protocol but the salient feature is that it functions as a MAC address
-learning Ethernet switch, not unlike the \ac{MEF} E-LAN interface
-specification~\cite{mef62,mefes}.
+
+The exchange itself is designed to mimic a distributed Ethernet switch. Multiple
+Ethernet-like link options include fibre, 802.11 wireless, licensed wireless,
+leased fibre, leased pseudo-wires. The switching fabric may be implemented on
+top using BGP-VPLS~\cite{rfc4761} (as we have in Section~\ref{sec:bgpvpls}) or
+the \textsc{b.a.t.m.a.n}~\cite{johnson2008simple} protocol. The salient feature
+between them is MAC address learning to establish an Ethernet switch similar to
+the \ac{MEF} E-LAN interface specification~\cite{mef62,mefes}.
 
 \subsubsection{Member \acp{AS}}
-As an \ac{IXP}, it can be taken as given that the connected networks
-are encapsulated into \acp{AS}. However due to the small size of the
-member networks, the policies are somewhat different from in the
-Internet's so-called \ac{DFZ}. The networks will typically not have
-routers capable of holding the entire Internet routing table, and they
-will not typically announce netblocks large enough to be globally
-visible. Rather, the purpose is \emph{encapsulation} so that each
-network may retain its internal structure and methodologies, and yet
-safely interconnect with its neighbours. Due to the
-liklihood of collisions it is inappropriate to use private
-\acp{ASN}~\cite{rfc6996} for this purpose, nor private IP
-addresses~\cite{rfc1918} for the exchange itself.
+
+Among traditional \acp{IXP} connected networks are encapsulated into Autonomous
+Systems (\acp{AS}). Among RemIX member networks, the policies of the small sized
+member networks are
+%member networks means that the policies are somewhat
+different from the Internet's \ac{DFZ}. In particular, member networks' smaller
+routers will be neither be capable of storing the entire Internet routing table,
+nor are they likely to announce netblocks large enough to be globally visible.
+However, \ac{AS} \emph{encapsulation} enables networks to retain their internal
+structures and methodologies, and to safely interconnect with neighbours. Due to
+the likelihood of collisions use of private \acp{ASN} is inappropriate for this
+purpose~\cite{rfc6996}, as are private IP addresses for the exchange
+itself~\cite{rfc1918}.
 
 \subsubsection{Exchange Transit}
-As the members will often not have sufficient amounts of IP address
-space to be directly visible on the global Internet, an entity
-can do so must advertise a larger netblock on their behalf. A
-specialised transit provider to mediate between the members and the
-rest of the Internet is needed. The members form a
-\emph{confederation} and the transit provider presents them
-collectively to upstream providers and other exchange points. This is
-an unusual feature: it is normally the exception rather than the rule
-for transit relationships to be implemented over exchange points, but
-here it is normal mode of operation. It should be emphasised that this
-service is optional and no requirement to purchase transit from this
-provider is imposed as a condition for joining the exchange, and
-nothing prevents other such providers from participating.
+
+RemIX members' IP address spaces will be small, and need some entity to
+advertise larger netblocks on their behalf. This suggests a specialized transit
+provider to mediate between members and the wider Internet. For this reason
+RemIX members form a \narrative{BGP?} confederation with a transit provider that
+presents them collectively to upstream providers and other exchange points. This
+is unusual for \acp{IXP}: Rarely are transit relationships implemented with
+exchange points. However, this is normal in RemIX, and likely necessary to
+function in the intended environment. We note that transit service should be
+optional to members, with no requirement to purchase said provider's transit as
+a condition for joining the exchange. Also, nothing prevents other such
+providers from participating.
 
 \subsubsection{Auxilliary Services}
-When member networks connect to the RemIX, they still have to
-configure \ac{BGP} peering amongst themselves. This is a burden
-because the number of such sessions grows as the square of the number
-of participants. To alleviate this, in common with other \acp{IXP}, a
-\emph{route-server} is provided that will repeat announcements
-received from one member to all others. Since \ac{BGP} is perceived as
-a complex, advanced topic in networking, it is very important to keep
-the amount of such configuration to a minimum. Other useful services
-such as \ac{NTP} and looking glasses for assistance in debugging may
-be made available as well.
 
-\subsection{Structural Benefits}
+Access networks, upon becoming members and connecting to RemIX,  configure
+\ac{BGP} peering amongst themselves. The complexity quickly increases as session
+numbers grow with the square of the number of participants. As commonly appears
+in \acp{IXP}, a \emph{route-server} repeats announcements from one member to all
+others. \ac{BGP} can be a complex, advanced topic in networking. A route
+reflector keeps the configuration burden to a minimum. Other useful services
+such as \ac{NTP} and looking glasses for assistance in debugging may be offered
+in addition.
 
-The features of RemIX described above will be instantly recognisable
-to anyone who has participated in a regular \ac{IXP}. This is by
-design, as RemIX is an application of a structure that has allowed the
-Internet to scale to the rural networking environment. Not only does
-encapsulating small community networks in \acp{AS}s mean that they can
-present a uniform interface to a transit provider but also that it is
-possible for them to cooperate and to share resources and yet for each
-to retain the ability to operate their own network as they see
-fit. This is very important because keeping as much of operations and
-maintenance local is the only way they can be sustainable. In turn
-this means that the internal details of each network should suit those
-doing the work and what they are comfortable with.
+%\subsection{Structural Benefits}
 
-The RemIX architecture was motivated by our own needs in Scotland. In
+The overall RemIX architecture is motivated by our own needs in Scotland. In
 the next section we present our first-phase implementation of RemIX,
 alongside remarks on usability and directions for the future.
 
