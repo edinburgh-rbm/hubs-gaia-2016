@@ -184,16 +184,17 @@ exchange.
 
 \subsection{Deployment Discussion}
 
-Our experience motivates higher-level comments to further distinguish RemIX
-deployments form their larger \ac{IXP} and \ac{NAP} cousins. Flat networks
-consisting of a single layer-2 broadcast domain can be plagued by difficult to
-troubleshoot problems. By its very design RemIX requires that members be able to
-communicate directly without mediation at the IP layer. This similarity is
-superficial. RemIX eliminates a large class of potential problems by allowing
-only unicast and \ac{ARP} traffic on the exchange. Moreover, members must
-nominate a specific \ac{MAC} address for their connections, which reduces the
-risk of loops and broadcast storms. We also adopt \ac{IXP} best practices such
-as quarantines for new connections while they are evaluated for correctness.
+Our experience motivates higher-level comments to further distinguish
+RemIX deployments form their larger \ac{IXP} cousins. Flat networks
+consisting of a single layer-2 broadcast domain can be plagued by
+difficult to troubleshoot problems. By its very design RemIX requires
+that members be able to communicate directly without mediation at the
+IP layer. Like other \acp{IXP} RemIX eliminates a large class of
+potential problems by allowing only unicast and \acs{ARP} traffic on
+the exchange. Moreover, members must nominate a specific \acs{MAC}
+address for their connections, which reduces the risk of loops and
+broadcast storms. We also adopt best practices such as quarantines for
+new connections while they are evaluated for correctness.
 
 % Many working network engineers have had the experience of inheriting a flat
 % network consisting of a single layer-2 broadcast domain, invariably plagued by
