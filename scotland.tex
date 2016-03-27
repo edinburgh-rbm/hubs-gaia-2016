@@ -84,30 +84,56 @@ simply as Ethernet from a functional perspective. The switching fabric
 itself at each of \ac{WHIX} points of presence is implemented with
 Mikrotik routers. This choice was made on the grounds of their
 moderate port density, low power consumption, low cost, and adequately
-featureful \ac{MPLS} implementation, of which more below.
+featureful \ac{MPLS} implementation, of which more below. All
+equipment is configured to pass Ethernet frames of at least 1600 bytes
+to provide room for the necessary extra protocol headers for
+implementing the E-LAN service.
 
-\subsection{West Highland IX at Layers 2/3}
+\subsection{West Highland IX at Layer 2}
+\label{sec:bgpvpls}
 
-To operate the exchange, various network numbers are required. It is
-not appropriate to use private IP addresses~\cite{rfc1918}
-or \acp{ASN}~\cite{rfc6996} for these purposes because of the
-possibility --- likelihood even --- of collision. A member network is
-perfectly entitled to use whichever numbers they like from the
-reserved rage internally for their own use, and if it happens that
-those same numbers are in use on the exchange, or even transitively
-reachable via other exchange members, it creates an ambiguous logical
-topology. This can be especially severe in the case of IP network
-collisions where the duplicate network is learned via external eBGP:
-the path selection algorithm will prefer the foreign path to the local
-one!\footnote{The authors have long wondered about the wisdom of these
-defaults in the path selection algorithm and have never encountered a
-situation where the default behaviour is the desired
-one. Nevertheless, this is what we have.}
+The design requirement of functional equivalence to a \ac{MAC} address
+learning Ethernet switch is met using \ac{BGP}
+signalled \ac{VPLS}~\cite{rfc4761} to create a full set of \ac{LSP}
+pseudo-wires between every pair of \ac{WHIX} edge routers. It should
+be emphasised that this section is implementation detail internal
+to \ac{WHIX} and is not visible to the members: all they see is a
+big Ethernet switch. Neither is this the only way to meet the design
+requirement. 
 
+Each \ac{WHIX} router maintains an \ac{OSPF} routing protocol
+adjacency with its neighbours and distributes reachability information
+for its loopback IP address. All addresses used for this purpose are
+private IPv4 addresses~\cite{rfc1918}. This is the basic layer that
+ensures reachability throughout the distributed fabric. With IP
+connectivity established, \ac{LDP}~\cite{rfc5036} is used to enable
+the carriage of non-IP traffic with \ac{MPLS} labels according to the
+topology of the underlying \ac{OSPF} network.
+
+Each router then establishes a \ac{BGP} peering session with the
+routers at Mallaig and Sabhal M\`{o}r Ostaig which act as route
+reflectors~\cite{rfc4456}. The use of route-reflectors enables all
+participating routers to exchange reachability information without
+requiring a full mesh ($n^2$) of internal peering
+sesions. With \ac{BGP} signalling established throughout the \ac{WHIX}
+fabric,  the multi-protocol extensions~\cite{rfc4760} can then be used
+by each router to signal that it wishes to form part of the
+exchange \ac{LAN}, which has a defined route target value and in this
+way a fully meshed \ac{VPLS} is created.
+
+Now each router has a virtual bridge interface that forms part of the
+exchange \ac{LAN}, and physical interfaces to which members are
+connected can be added to this bridge so that they form part of the
+exchange. Care must be taken to prevent loops so that members do not
+see traffic that they themselves originated and this is accomplished
+with a split-horizon method~\cite{rfc4762}. Equally care must be taken
+that members do not themselves create bridge loops via their own
+network so a \ac{MAC} address filter on the port is employed.
+
+\subsection{West Highland IX at Layer 3}
 Requesting IP address allocations for exchange use from the RIPE NCC
 was straightforward. It did, however, require the formal development
 of rules for connecting to the exchange~\cite{whixrules}.
-
 
 %%%%% FIGURE %%%%%
 \begin{figure}[h]
@@ -125,10 +151,8 @@ of rules for connecting to the exchange~\cite{whixrules}.
   }
 \end{figure}
 
-
-
-\subsection{Usability 'Trade-off'} \label{subsec:use}
-\narrative{Our use of cheap proprietary vs open batman-compatible}
+%\subsection{Usability 'Trade-off'} \label{subsec:use}
+%\narrative{Our use of cheap proprietary vs open batman-compatible}
 
 
 \subsection{Deployment Discussion}
