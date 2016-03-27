@@ -22,9 +22,9 @@ construction of an exchange fabric geographically ambitious. Four networks have
 a history of interconnecting and sharing network resources, pre-established
 relationships that must be respected in our deployment.
 
-Our deployment's location is its namesake, the West Highlands Internet
-Exchange (WHIX). Both logical and physical layers are described below, with
-additional lessons and comments drawn from our experience.
+Our deployment's location is its namesake, the \ac{WHIX}. Both logical
+and physical layers are described below, with additional lessons and
+comments drawn from our experience.
 
 \subsection{West Highland IX at Layer 1}
 
@@ -83,7 +83,7 @@ simply as Ethernet from a functional perspective. The switching fabric
 itself at each of \ac{WHIX} points of presence is implemented with
 Mikrotik routers. This choice was made on the grounds of their
 moderate port density, low power consumption, low cost, and adequately
-featureful \ac{MPLS} implementation, of which more below. All
+featureful \acs{MPLS} implementation, of which more below. All
 equipment is configured to pass Ethernet frames of at least 1600 bytes
 to provide room for the necessary extra protocol headers for
 implementing the E-LAN service.
@@ -91,43 +91,43 @@ implementing the E-LAN service.
 \subsection{West Highland IX at Layer 2}
 \label{sec:bgpvpls}
 
-The design requirement of functional equivalence to a \ac{MAC} address
-learning Ethernet switch is met using \ac{BGP}
-signalled \ac{VPLS}~\cite{rfc4761} to create a full set of \ac{LSP}
+The design requirement of functional equivalence to a \acs{MAC} address
+learning Ethernet switch is met using \acs{BGP}
+signalled \acs{VPLS}~\cite{rfc4761} to create a full set of \acs{LSP}
 pseudo-wires between every pair of \ac{WHIX} edge routers. It should
 be emphasised that this section is implementation detail internal
 to \ac{WHIX} and is not visible to the members: all they see is a
 big Ethernet switch. Neither is this the only way to meet the design
 requirement. 
 
-Each \ac{WHIX} router maintains an \ac{OSPF} routing protocol
+Each \ac{WHIX} router maintains an \acs{OSPF} routing protocol
 adjacency with its neighbours and distributes reachability information
 for its loopback IP address. All addresses used for this purpose are
 private IPv4 addresses~\cite{rfc1918}. This is the basic layer that
 ensures reachability throughout the distributed fabric. With IP
-connectivity established, \ac{LDP}~\cite{rfc5036} is used to enable
-the carriage of non-IP traffic with \ac{MPLS} labels according to the
-topology of the underlying \ac{OSPF} network.
+connectivity established, \acs{LDP}~\cite{rfc5036} is used to enable
+the carriage of non-IP traffic with \acs{MPLS} labels according to the
+topology of the underlying \acs{OSPF} network.
 
-Each router then establishes a \ac{BGP} peering session with the
+Each router then establishes a \acs{BGP} peering session with the
 routers at Mallaig and Sabhal M\`{o}r Ostaig which act as route
 reflectors~\cite{rfc4456}. The use of route-reflectors enables all
 participating routers to exchange reachability information without
 requiring a full mesh ($n^2$) of internal peering
-sesions. With \ac{BGP} signalling established throughout the \ac{WHIX}
+sesions. With \acs{BGP} signalling established throughout the \ac{WHIX}
 fabric,  the multi-protocol extensions~\cite{rfc4760} can then be used
 by each router to signal that it wishes to form part of the
-exchange \ac{LAN}, which has a defined route target value and in this
-way a fully meshed \ac{VPLS} is created.
+exchange \acs{LAN}, which has a defined route target value and in this
+way a fully meshed \acs{VPLS} is created.
 
 Now each router has a virtual bridge interface that forms part of the
-exchange \ac{LAN}, and physical interfaces to which members are
+exchange \acs{LAN}, and physical interfaces to which members are
 connected can be added to this bridge so that they form part of the
 exchange. Care must be taken to prevent loops so that members do not
 see traffic that they themselves originated and this is accomplished
 with a split-horizon method~\cite{rfc4762}. Equally care must be taken
 that members do not themselves create bridge loops via their own
-network so a \ac{MAC} address filter on the port is employed.
+network so a \acs{MAC} address filter on the port is employed.
 
 \subsection{West Highland IX at Layer 3}
 
@@ -213,12 +213,11 @@ that exists for the benefit of and is controlled by the members, who
 are also members of the \ac{IXP}. As a consequence all parties'
 economic interests are aligned.
 
-
-A benefit of \ac{WHIX}' implementation choice of \ac{BGP}-\ac{VPLS}
+A benefit of \ac{WHIX}' implementation choice of \acs{BGP}-\acs{VPLS}
 for making the exchange fabric is that it is easy to offer auxilliary
 point to point pseudo-wire services to its members. This is especially
 useful for those networks who, for one reason or another, have need of
 such a service for making connections \emph{internal} to their
 networks. This is as simple as creating a distinct route target
 bridged to two of their ports which results in the establishment of a
-dedicated~\ac{VPLS} instance for them.
+dedicated~\acs{VPLS} instance for them.
