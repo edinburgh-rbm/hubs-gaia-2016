@@ -8,18 +8,16 @@ Our requirements are shaped by three broad goals:
 \begin{inparaenum}[(i)]
   \item establish high-quality backhaul to remote and difficult to
     reach regions;
-  \item ensure affordability for the small access networks it is
-    intended to serve;
+  \item ensure backhaul affordability for small access networks;
   \item enable the networks to maintain the autonomy that is
     fundamental to their sustainability.
 \end{inparaenum}
-Concretely this means that the member networks must be able to
-efficiently connect to one or more transit providers and at the same
-time continue to make arrangements and articulate policies amongst
-themselves. These requirements mean that a \emph{logical}
-concentration of internetwork connections is desireable on the one
-hand and that there should be a shared switching fabric below the
-network layer on the other.
+%Concretely this means that the
+Member networks must be able to connect to one or more transit providers.
+Members must also be free to arrange and articulate policies among themselves.
+These requirements implies that a \emph{logical} concentration of internetwork
+connections is desireable, which suggests a shared switching fabric below the
+network layer.
 
 \begin{figure*}
   \subfloat[Traditional IXP]{
@@ -50,27 +48,34 @@ network layer on the other.
   \label{fig:ixb}
 \end{figure*}
 
-If all of the networks were capable of connecting to the same
-location, the design requirements would be met simply with an Ethernet
-switch, not unlike a traditional \ac{IXP} design as in
-Figure~\ref{fig:ixbA}. Since we don't have that luxury, we take the
-contemporary design of a multi-site \ac{IXP} as in
-Figure~\ref{fig:ixbB} and take it to a \emph{maximally distributed}
-extreme---Figure~\ref{fig:ixbC}. A RemIX exchange is distributed so
-that a lightweight point of presence is established where there are as
-little as two members. Members either colocate their border routers
-with the exchange edge switch, or remotely on the far end of a radio
-link as circumstances dictate.
+Networks that are capable of connecting to the same location can do so with an
+Ethernet switch. This is the basis for traditional \ac{IXP} design as depicted
+in Figure~\ref{fig:ixbA}, where subscriber networks connect to a central fabric
+with their own router that sits inside the IXP facility. Our remote networks
+have no such luxury. In response, we take and distribute the contemporary design
+of a multi-site \ac{IXP}, shown in Figure~\ref{fig:ixbB}. A multi-site \acp{IXP}
+presents a single logical fabric to its subscribers, implemented with switches
+that are joined by private circuits.
+% Since we don't have that luxury, we take the contemporary design of a
+% multi-site
+% \ac{IXP} as in Figure~\ref{fig:ixbB} and take it to a \emph{maximally
+% distributed} extreme---Figure~\ref{fig:ixbC}.
 
-The RemIX points of presence are \emph{lightweight}. This is
-reflective of the practical constraints that motivate it. Because it
-must be distributed, at each site there are only a handful of networks
-that will connect, so very high port densities are unnecessary. At the
-same time space and power are both at a premium. For example, a remote
-port into RemIX is more likely to be housed within a small cabinet on
-top of a hill, or in a space that is donated by a property owner for
-this purpose. Therefore small and power-efficient equipment must be
-used.
+The RemIX architecture that emerges is shown in Figure~\ref{fig:ixbC}. RemIX
+exchanges have no large facility nor physical housing. Instead Remix is
+distributed so that \emph{lightweight} points of presence may be established
+where there are as few as two members. Members either colocate their border
+routers with the exchange switch, or remotely on the far end of a link, as
+circumstances dictate.
+
+The set of circumstances motivate the lightweight nature of points of presence.
+Since the fabric is distributed, fewer networks that will connect from each
+site. High port densities are unnecessary. Simultaneously, space and power are
+both at a premium. For example, a remote port into RemIX could be housed in a
+small cabinet atop a hill, or in space that is donated by a property owner for
+this purpose. Equipment is therefore restricted to the small and
+power-efficient.
+
 
 \subsection{RemIX Components}
 
@@ -97,12 +102,12 @@ visible. Rather, the purpose is \emph{encapsulation} so that each
 network may retain its internal structure and methodologies, and yet
 safely interconnect with its neighbours. Due to the
 liklihood of collisions it is inappropriate to use private
-\acp{ASN}~\cite{rfc6996} for this purpose, nor private IP 
+\acp{ASN}~\cite{rfc6996} for this purpose, nor private IP
 addresses~\cite{rfc1918} for the exchange itself.
 
 \subsubsection{Exchange Transit}
 As the members will often not have sufficient amounts of IP address
-space to be directly visible on the global Internet, an entity 
+space to be directly visible on the global Internet, an entity
 can do so must advertise a larger netblock on their behalf. A
 specialised transit provider to mediate between the members and the
 rest of the Internet is needed. The members form a
@@ -147,7 +152,7 @@ the next section we present our first-phase implementation of RemIX,
 alongside remarks on usability and directions for the future.
 
 %\begin{itemize}
-%    \item provides default transit to Internet (useful because of IP 
+%    \item provides default transit to Internet (useful because of IP
 %      limits - have to be careful about if/how to raise IP issue)
 %    \item BGP solves $n^2$ connects, gives bilateral arrangements
 %    \item (in our case) BGP is also the foundation of exchange fabric, i.e.
