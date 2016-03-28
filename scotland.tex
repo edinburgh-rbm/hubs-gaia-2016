@@ -133,19 +133,15 @@ ports.
 
 \subsection{West Highland IX at Layer 3+}
 
-Logical connectivity being established between all member ports, it is
-necessary to assign IP addresses to their border routers and public
-exchange infrastructure such as the route server. As mentioned above
-the use of private IP address space for this purpose is undesireable
-due to the possibility of collisions with members' own
-infrastructure. Fortunately by design, \ac{WHIX} meets the definition
-of an \ac{IXP}~\cite{ripe451,whixrules} and allocations of IPv4 and
-IPv6 addresses were obtained from the RIPE NCC~\cite{ripe649}.
+Given logical connectivity between all member ports, it remains to assign IP
+addresses to their border routers, as well as public infrastructure such as the
+router server. As mentioned above the use of private IP address space for this
+purpose is undesireable since it generates risks of collisions with members' own
+infrastructure. \ac{WHIX}, and more generally RemIX, is fortunate in this
+regard: The design meets the definition of an \ac{IXP}~\cite{ripe451,whixrules},
+making it possible to acquire IPv4 and IPv6 address allocations from RIPE
+NCC~\cite{ripe649}.
 
-Each member network now has everything they need: the ability to
-communicate at layer 2 with each other, an IP address for layer 3, an
-autonomous system number to identify themselves, and their own
-networks to announce.
 %%%%% FIGURE %%%%%
 \begin{figure}[h]
   \resizebox{\linewidth}{!}{
@@ -165,21 +161,24 @@ networks to announce.
   %% optimisation where it is not feasible to do so efficiently over the
   %% exchange.
   }
+  \label{fig:l3}
 \end{figure}
-So that they don't need to explicitly configure bilateral peering
-relationships among each other (another $n^2$ configuration
-task), \ac{WHIX} provides two route-servers, again at Mallaig and
-Sabhal M\`{o}r Ostaig to redistribute reachability information. A
-route-server behaves like a route-reflector except that it does not
-insert its own \ac{ASN} into the path.
 
-HUBS is also present at \ac{WHIX} as a member, but in addition to
-public multilateral peering, it establishes bilateral sessions with
-those members that wish where it will announce either a default route
-or full Internet routing tables and will forward member's
-announcements to its other peers and upstreams. In this way transit
-and so connectivity to the global Internet is provided over the
-exchange.
+The full layer-3 \ac{WHIX} topology is shown in Figure~\ref{fig:l3}. At this
+stage member network have everything they need. Members can communicate at layer
+2. Each has an IP address at layer 3, an autonomous system number for
+identification, and their own networks to announce. Bilateral peering
+arrangements (an otherwise $n^2$ configuration task) are facilitated by two
+route-servers, as before at Mallaig and Sabhal M\`{o}r Ostaig. The route servers
+redistribute reachability information, akin to a route-reflector omits its own
+\ac{ASN} from the path.
+
+HUBS, as the transit provider described in Section~\ref{subsec:hubs}, is also
+present at \ac{WHIX} as a member. In addition to public multilateral peering, it
+establishes bilateral sessions with those members wishing to announce either a
+default route or full Internet routing tables. HUBS forwards those members'
+announcements to their other peers and upstreams. In this way transit, and hence
+connectivity to the global Internet, is provided over the exchange.
 %\subsection{Usability 'Trade-off'} \label{subsec:use}
 %\narrative{Our use of cheap proprietary vs open batman-compatible}
 
@@ -215,11 +214,11 @@ that exists for the benefit of and is controlled by the members, who
 are also members of the \ac{IXP}. As a consequence all parties'
 economic interests are aligned.
 
-A benefit of \ac{WHIX}' implementation choice of \acs{BGP}-\acs{VPLS}
-for making the exchange fabric is that it is easy to offer auxilliary
-point to point pseudo-wire services to its members. This is especially
-useful for those networks who, for one reason or another, have need of
-such a service for making connections \emph{internal} to their
-networks. This is as simple as creating a distinct route target
-bridged to two of their ports which results in the establishment of a
-dedicated~\acs{VPLS} instance for them.
+Finally, \ac{WHIX}' implementation using \acs{BGP}-\acs{VPLS}
+to construct the exchange fabric makes it possible to offer auxiliary
+point to point pseudo-wire services to its members. This is
+useful for those members that have need for making connections internal to their
+networks.
+% This is as simple as creating a distinct route target
+% bridged to two of their ports which results in the establishment of a
+% dedicated~\acs{VPLS} instance for them.
