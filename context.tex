@@ -13,7 +13,7 @@ carrier-neutral facilities allowing dense inter-network connections on
 a non-discriminatory basis. Presence at an \acp{IXP} entails freedom
 to make bilateral arrangements with any other network also
 present. Worldwide, \acp{IXP} now number in the hundreds and are a
-fundamental structural feature of the Internet.
+fundamental feature in the structure of the Internet.
 
 % Mutual interconnectivity in
 % networking community recognised that
@@ -33,47 +33,52 @@ fundamental structural feature of the Internet.
 % organised as a not for profit entity, and treated as a cost-centre by its
 % members.
 
-This structure appears useful for bringing together several remote
-networks in order that this increased density of interconnection can
-be used to pool traffic to make collective use of expensive resources
+A mirroring of this structure would be useful in joining remote
+networks. The increases of interconnection density could then
+be used to pool traffic, and make collective use of expensive resources
 such as long-distance circuits. However, there are some important
 differences between the environment of a typical urban \ac{IXP} and
-the West Coast of Scotland:
+the rural regions, as in the West Coast of Scotland:
 \begin{inparaenum}[(i)]
-  \item there are no data centres there, carrier-neutral or otherwise;
-  \item due to geography there is no single place where all of the
+  \item There are no data centres, carrier-neutral or otherwise;
+  \item due to geography there is no single facility where all of the
     networks could meet.
 \end{inparaenum}
 
 \subsection{Motivating Environment}
-The Scottish Highlands and Islands consist of mountainous terrain
-stretching 400km North to South consisting of islands in the West
-together with deep lochs and glens penetrating the mainland to the
-East.  The economy was traditionally maritime, and nearly all
-habitation is at sea level or in the glens.
 
-Until recently there was little fibre in the region.  Much of the
-telephone network in the region was constructed with microwave
-links. That has started to change, but the main problem remains that
-the fibre reaches only to telephone exchanges; and of those,
-fibre-based services are only available at a few. In the medium term
-future local wireless distribution offers the only feasible technology
-for adequate bandwidth and quality of service.
+Scotland comprises 1/3rd of the area of Great Britian, though its population is
+less than 10\%. It is also home to 790 islands, 95 of which are inhabited with
+\textasciitilde 100,000 people. The Scottish Highlands and Islands, where this
+work is currently focussed, consist of mountainous terrain stretching along a
+400km north to south corridor. Islands are scattered on the West together with
+deep lakes and glens penetrating the mainland to the East.  The economy was
+traditionally maritime, and nearly all habitation is at sea level or in the
+glens.
+
+Until recently there was little fibre in the region.  Much of the telephone
+network in the region was constructed with microwave links. Infrastructure is
+improving, though all plans terminate at telephone exchanges. From among those,
+fibre-based services are rare. In the medium term future, the only feasible
+technology for adequate bandwidth and quality of service is local wireless
+distribution.
 
 Starting in 2008, the Tegola project~\cite{tegola} started to
 experiment with technology that would enable communities to build
-their own wireless networks. This included electrical
-and mechanical infrastructure as well as radio equipment.  It
-rapidly became clear that volunteer communities or small businesses
-could construct and maintain these networks at a small fraction of the
-cost that a centralized organizaton would charge for a number of
-reasons: first, the cost and time of travel to service the relays in
-remote areas is infinitessimal compared with the cost of a helicopter;
-second site licences and wayleaves can usually be negotiated for free
-by lightweight agreements; third, we have developed basic technology
-(Fig. \ref{fig:mhialairigh}) for robust, inexpensive relay
-construction that works well in the mountainous terrain in which the
-project operates.
+their own wireless networks.
+% This included electrical and mechanical infrastructure as well as radio
+% equipment.  It rapidly became clear that volunteer communities or small
+% businesses could construct and maintain these networks at a small fraction of
+% the cost that a centralized organizaton would charge for a number of reasons:
+% first, the cost and time of travel to service the relays in remote areas is
+% infinitessimal compared with the cost of a helicopter; second site licences and
+% wayleaves can usually be negotiated for free by lightweight agreements; third,
+The details of the Tegola, and its dissemination to nearby communities, are
+omitted due to space constraints. Relevant to this project is the technology
+that emerged. Figure~\ref{fig:mhialairigh}, for example, features the type of
+robust, inexpensive relay construction that operates in mountainous region, and
+that can be constructed by its residents.
+
 \begin{figure}[h]
 \centering
  \includegraphics[width=\columnwidth]{figs/mhialairigh-from-behind}
@@ -81,30 +86,46 @@ project operates.
 \label{fig:mhialairigh}
 \end{figure}
 
-The ideas were taken up by a number of communities across Scotland
-including those around the Tegola project which extend over 100km of
-the coastline (Fig.~\ref{fig:whixmap}). A typical community would have
-a local distribution network and point-to-point links, often in excess
-of 20km, connected to a set of ADSL lines somewhere near a telephone
-exchange. This was far from ideal, but it was the only affordable
-source of backhaul. Although the communities shared their expertise
-and sometimes their infrastructure, they operated independently.
+% The ideas were taken up by a number of communities across Scotland
+% including those around the Tegola project which extend over 100km of
+% the coastline (Fig.~\ref{fig:whixmap}). A typical community would have
+% a local distribution network and point-to-point links, often in excess
+% of 20km, connected to a set of ADSL lines somewhere near a telephone
+% exchange. This was far from ideal, but it was the only affordable
+% source of backhaul. Although the communities shared their expertise
+% and sometimes their infrastructure, they operated independently.
 
-Recently, it has become possible to obtain Ethernet services in two
-major towns, but the cost is only reasonable if communities combine
-and buy at wholesale prices.  For this one needs two things: an
-organisational vehicle for the communities act together to achieve
-economies of scale, and a networking infrastructure.
+% Recently, it has become possible to obtain Ethernet services in two
+% major towns, but the cost is only reasonable if communities combine
+% and buy at wholesale prices.  For this one needs two things: an
+% organisational vehicle for the communities act together to achieve
+% economies of scale, and a networking infrastructure.
 
-The terrain and the sociology of the Highlands and Island raises some
-important issues for both of these.
+Many communities have since constructed their own local distribution networks
+with point-to-point wireless links that can span more than 20km. Expertise is
+often shared between them, also infrastructure where feasible, yet they operate
+independently. Constrained by availability, they acquire backhaul via ADSL lines
+nearby to telephone exchanges. Ethernet services have since emerged in two
+larger towns, with wholesale pricing that exceeds the budget of any single
+community. A resolution has two components: An organizational vehicle that
+combines networks to generate economies of scale, and a supporting network
+infrastructure.
+
+% The terrain and the sociology of the Highlands and Island raises some
+% important issues for both of these.
+
+We have learned that solutions are complicated by both terrain and by culture.
+In particulare we note the following observations.
 \begin{itemize}
-\item The social communities do not always align well with the
-  ``electronic'' communities. It is relatively easy to bounce signals
-  back and forth across a loch or glen, but extremely hard to carry
-  them over a 1000m high range of mountains. On the other hand
-  social and economic groupings can be determined by the ways in which
-  they obtain funding.%\footnote{Knoydart is an isolated
+\item Social aspects and organization of communities can fail to align with the
+  design options for generating ``electronic'' or networked communities.
+  Physical landscape constrains connectivity, while social and economic groups
+  can be determined by vehicles for funding.
+  % It is relatively easy to bounce signals
+  % back and forth across a loch or glen, but extremely hard to carry
+  % them over a 1000m high range of mountains. On the other hand
+  % social and economic groupings can be determined by the ways in which
+  % they obtain funding.%\footnote{Knoydart is an isolated
     %% peninsula (see Fig.~\ref{fig:whixmap})  of which the North and
     %% West coasts are served by a network based on Loch Hourn and the
     %% South coast is served by Loch Nevis.  Contrast this with the Sleat
@@ -112,15 +133,16 @@ important issues for both of these.
     %% served by Loch Hourn, Loch Nevis and Eigg, but is run
     %% independently as a single entity with three connections to the
     %% rest of the world.}.
-\item Communities structure their networks in various ways, and the
-  complexity varies from a single hub and spoke toplogy to a network
-  with a dozen links including redundant paths.
-  between relays for redundancy.
-\item Many adjacent communities have successfully duplicated the local
-  access network model. Together they cover a significantly large,
-  contiguous geographical area.
-\item Communities may temporarily share network resources but this is
-  not genearlly done in a systematic or organised fashion.
+\item Local network infrastructure is non-uniform and varies in complexity.
+  % between communities structure their networks in various ways, and the
+  % complexity varies from a single hub and spoke toplogy to a network
+  % with a dozen links including redundant paths.
+  % between relays for redundancy.
+% \item Many adjacent communities have successfully duplicated the local
+%   access network model. Together they cover a significantly large,
+%   contiguous geographical area.
+\item Communities that share network resources generally do so in a
+  non-systematic or ad-hoc manner.
 \end{itemize}
 
 %% Stimulated in part by developments in the Highlands and Islands,
