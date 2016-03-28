@@ -15,7 +15,7 @@ Our requirements are shaped by three broad goals:
 %Concretely this means that the
 Member networks must be able to connect to one or more transit providers.
 Members must also be free to arrange and articulate policies among themselves.
-These requirements implies that a \emph{logical} concentration of internetwork
+These requirements imply that a \emph{logical} concentration of internetwork
 connections is desireable, which suggests a shared switching fabric below the
 network layer.
 
@@ -67,7 +67,7 @@ where there are as few as two members. Members either colocate their border
 routers with the exchange switch, or remotely on the far end of a link, as
 circumstances dictate.
 
-The set of circumstances motivate the lightweight nature of points of presence.
+These circumstances motivate the lightweight nature of points of presence.
 Since the fabric is distributed, fewer networks that will connect from each
 site. High port densities are unnecessary. Simultaneously, space and power are
 both at a premium. For example, a remote port into RemIX could be housed in a
@@ -81,8 +81,7 @@ power-efficient.
 \subsubsection{Switching Fabric}
 
 The exchange itself is designed to mimic a distributed Ethernet switch. Multiple
-Ethernet-like link options include fibre, 802.11 wireless, licensed wireless,
-leased fibre, leased pseudo-wires. The switching fabric may be implemented on
+Ethernet-like link options include fibre, 802.11 wireless, licensed wireless, fibre, leased pseudo-wires. The switching fabric may be implemented on
 top using \acs{BGP}-\acs{VPLS}~\cite{rfc4761} (as we have in
 Section~\ref{sec:bgpvpls}) or the
 \acs{BATMAN}~\cite{johnson2008simple} or
