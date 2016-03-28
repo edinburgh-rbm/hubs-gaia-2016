@@ -40,7 +40,7 @@ the service areas reachable from each site.
 \begin{figure*}
   \centering
   \subfloat[Physical topology of \ac{WHIX}.]{
-    \resizebox{0.9\columnwidth}{0.35\textheight}{
+    \resizebox{0.8\columnwidth}{0.35\textheight}{
       \begin{tikzpicture}
         \whixphysicaldiagram
       \end{tikzpicture}
@@ -48,7 +48,7 @@ the service areas reachable from each site.
     \label{fig:whixmap}
   }\hspace{\columnsep}
   \subfloat[Member connections to \ac{WHIX}]{
-    \resizebox{0.9\columnwidth}{0.35\textheight}{
+    \resizebox{0.8\columnwidth}{0.35\textheight}{
       \begin{tikzpicture}
         \whixmeshdiagram
       \end{tikzpicture}
@@ -63,11 +63,11 @@ the service areas reachable from each site.
   switching fabric and the solid lines to member connections.}
 \end{figure*}
 
-Where Figure~\ref{fig:whixmap} represents the physical topology
-of \ac{WHIX} itself, Figure~\ref{fig:phytop} shows the member network
-connections. In the latter, unlabeled red nodes are the \ac{WHIX}
-points of presence and correspond with the same set of red nodes in Figure~\ref{fig:whixmap}. The dashed lines represent the fully connected
-virtual topology that implements the exchange E-LAN.
+We complement \ac{WHIX}' physical topology in Figure~\ref{fig:whixmap} with
+the member network in Figure~\ref{fig:phytop}. In the latter, unlabeled red
+nodes are the \ac{WHIX} points of presence and correspond with the same set of
+red nodes in Figure~\ref{fig:whixmap}. The dashed lines represent the fully
+connected virtual topology that implements the exchange E-LAN.
 
 The two places in the region where long-distance ethernet circuits are
 available on the mainland are the towns of Mallaig and Kyle of
@@ -89,7 +89,7 @@ the E-LAN service.
 
 \subsection{West Highland IX at Layer 2}\label{sec:bgpvpls}
 
-We emphasize that layer-2 implementation details are \emph{internal} to
+We emphasize that layer-2 details are \emph{internal} to
 \ac{WHIX}, and invisible to members who only see an Ethernet switch. Also, our
 implementation decisions are by no means the only possible means of
 implementation.
@@ -112,19 +112,19 @@ Non-IP traffic is carried via \acs{LDP}~\cite{rfc5036}
 with \acs{MPLS} labels according to the topology of the underlying \acs{OSPF}
 network.
 
-Routers in \ac{WHIX} establish a \acs{BGP} peering session with the routers at
-Mallaig and Sabhal M\`{o}r Ostaig, which act as route reflectors~\cite{rfc4456}.
-The use of route-reflectors enables all participating routers to exchange
-reachability information without requiring a full mesh ($n^2$) of internal
-peering sessions. The presence of \acs{BGP} signalling throughout the \ac{WHIX}
-fabric enables the use of multi-protocol extensions~\cite{rfc4760}. Routers can
-use extensions to signal a desire to form part of the exchange \acs{LAN}.
+Routers in \ac{WHIX} establish \acs{BGP} peering sessions with routers at
+Mallaig and Sabhal M\`{o}r Ostaig that act as route reflectors~\cite{rfc4456}.
+Participating routers use route reflectors to exchange reachability information
+without requiring a full mesh ($n^2$) of internal peering sessions. The presence
+of \acs{BGP} signalling throughout the \ac{WHIX} fabric enables the use of
+multi-protocol extensions~\cite{rfc4760}. Routers can use extensions to signal a
+desire to form part of the exchange \acs{LAN}.
 %% MF- What has a defined target, the extension or the router?
 %, which has a defined route target value and in this
 The result is a fully meshed \acs{VPLS}, where each router has a virtual bridge
 interface that forms part of the exchange \acs{LAN}.
 
-New physical interfaces can be added to virtual bridges, as needed, so that they
+Interfaces can be added to virtual bridges, as needed, to
 form part of the exchange. Care must be taken to prevent loops in which members
 see the traffic that they originate. This is accomplished with a split-horizon
 method~\cite{rfc4762}. Equally, members must be prevented from creating bridge
@@ -205,7 +205,7 @@ new connections while they are evaluated for correctness.
 % extends far enough to meet the design requirements but not so far as to become
 % unwieldy.
 
-The RemIX norm of providing IP transit also deserves to be addressed. Transit
+IP transit in RemIX also deserves to be addressed. Transit
 via the exchange, for networks that are not otherwise visible on the Internet,
 may evoke notions of conflicting interests that
 beset \acp{NAP}. However the similarity is superficial. Here, the transit
