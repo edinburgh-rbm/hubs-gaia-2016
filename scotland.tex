@@ -28,14 +28,13 @@ comments drawn from our experience.
 
 \subsection{West Highland IX at Layer 1}
 
-The physical \ac{WHIX} fabric is overlayed onto a map of the region in
-Figure~\ref{fig:whixmap}. The map itself is stylized for clarity, and
-preserves critical geographical features. Red connected nodes indicate
-the connection sites. In a traditional IXP these sites would be the
-ethernet ports into which subscriber \acp{AS} plug-in. WHIX sites are
-connected by wireless radio links in black, and leased 100Mbps or 1Gbps
-circuits in orange. The areas enclosed with dotted lines correspond to
-the service areas reachable from each site.
+The physical \ac{WHIX} fabric is overlayed onto a stylized map of the region in
+Figure~\ref{fig:whixmap}. The map itself preserves critical geographical
+features. Red connected nodes are the connection sites. In a traditional
+\ac{IXP} these sites are the Ethernet ports into which subscriber \acp{AS}
+plug-in. WHIX sites are connected by wireless radio links in black, and leased
+100Mbps or 1Gbps circuits in orange. The areas enclosed with dotted lines
+correspond to the service areas reachable from each site.
 %%%%% FIGURE %%%%%
 \begin{figure*}
   \centering
@@ -46,7 +45,7 @@ the service areas reachable from each site.
       \end{tikzpicture}
     }
     \label{fig:whixmap}
-  }\hspace{\columnsep}
+  }\hfil %\hspace{\columnsep}
   \subfloat[Member connections to \ac{WHIX}]{
     \resizebox{0.8\columnwidth}{0.35\textheight}{
       \begin{tikzpicture}
@@ -173,11 +172,11 @@ route-servers, as before at Mallaig and Sabhal M\`{o}r Ostaig. The route servers
 redistribute reachability information, akin to a route-reflector omits its own
 \ac{ASN} from the path.
 
-HUBS, as the transit provider described in Section~\ref{subsec:hubs}, is also
+The transit provider, HUBS (see Section~\ref{subsec:hubs}), is also
 present at \ac{WHIX} as a member. In addition to public multilateral peering, it
-establishes bilateral sessions with those members wishing to announce either a
+establishes bilateral sessions with members wishing to announce either a
 default route or full Internet routing tables. HUBS forwards those members'
-announcements to their other peers and upstreams. In this way transit, and hence
+announcements upstream and to their peers. In this way transit, and hence
 connectivity to the global Internet, is provided over the exchange.
 %\subsection{Usability 'Trade-off'} \label{subsec:use}
 %\narrative{Our use of cheap proprietary vs open batman-compatible}
