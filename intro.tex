@@ -32,16 +32,23 @@ interconnecting with nearby networks to generate economies of scale,
 % has datacentres and any diversity of network infrastructure to speak of.}.
 
 The absence of resource pooling options for remote networks is the focus of this
-paper. The \acf{IXP} is a structure that plays a pivotal role in facilitating
-interconnections between networks~\cite{Ager:2012}. We are motivated by
-\acp{IXP} for two reasons. First, the primary role of an \ac{IXP} is economic.
-Member networks can connect $n$ networks at an IXP with $n$ circuits, rather
-than arranging for $\frac{n^2}{2}$ circuits independently. Second, the \ac{IXP}
-model of multilateral public peering leads to high density interconnections, and
-traffic across the exchange that can be comparable in magnitude to the largest
-global service providers~\cite{Ager:2012}. Together, they are an indication that
-such a topology might be used to improve inter-connectivity between networks in
-under-serviced regions, and to pool otherwise expensive backhaul resources.
+paper. One such example is operated by the Guifi Foundation~\cite{guifi}. Guifi
+operates a regional backbone network as a commons. The abstraction that is
+presented to clients is an exchange point implemented over IP. In this type of
+network, relationships between end-users are either mediated by Guifi, or
+implemented as an overlay. 
+
+The \acf{IXP} is a long-standing structure that plays a pivotal role in
+facilitating interconnections between networks~\cite{Ager:2012}. We are
+motivated by \acp{IXP} for two reasons. First, the primary role of an \ac{IXP}
+is economic. Member networks can connect $n$ networks at an IXP with $n$
+circuits, rather than arranging for $\frac{n^2}{2}$ circuits independently.
+Second, the \ac{IXP} model of multilateral public peering leads to high density
+interconnections, and traffic across the exchange that can be comparable in
+magnitude to the largest global service providers~\cite{Ager:2012}. Together,
+they are an indication that such a topology might be used to improve
+inter-connectivity between networks in under-serviced regions, and to pool
+otherwise expensive backhaul resources.
 
 In this paper we present RemIX, a \emph{distributed} Internet Exchange for
 Remote and rural networks. The RemIX architecture is agnostic to underlying
