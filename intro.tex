@@ -1,7 +1,7 @@
 In remote and rural regions the last-mile problem has been the subject of much
 focus. Deployments in remote regions of the world have shown that it is possible
 to build high quality access networks in otherwise under-serviced
-regions~\cite{xxx}. Their underlying technologies range in medium (eg. copper
+regions~\cite{guifi, tegola,Hasan:2015}. Their underlying technologies range in medium (eg. copper
 or fibre-optic cabling, licensed or unlicensed wireless), energy (eg. solar or
 wind generation or mains supplied), and topology.
 %(eg. multi-hop, one-to-many\narrative{not quite sure what these two %mean}).
@@ -58,17 +58,18 @@ distances permitted between points of presence, and the lower density of member
 networks that connect to them. The trade-off between distance and density gives
 rise to the idea of \emph{lightweight} points of presence. The lightweight
 nature is advantageous, in that as few as two member networks are sufficient to
-establish a point of presence. The RemIX switching fabric is agnostic to
-physical layer technology and topology.
+establish a point of presence.
+% The RemIX switching fabric is agnostic to physical layer technology and
+% topology.
 
 We describe our RemIX implementation in Scotland. In its current form our
 deployment services a \~2000km$^2$ region that spans sea and mountainous
 mainland. Implementation details are provided, with motivating rationale, so
 that others may benefit from our efforts. Functionally, our implementation
-appears to its members as a large Ethernet switch. Crucially, RemIX allows
-member networks to establish unmediated relationships between themselves.
+appears to its members as a large Ethernet switching fabric. Crucially, RemIX
+allows member networks to establish unmediated relationships between themselves.
 
 In the following sections we further motivate \acp{IXP} as an ideal model. We
-then discuss the RemIX architecture in detail. Our deployment is then described,
+then discuss the RemIX architecture in detail. Our deployment is described,
 along with lessons learned. Finally, a broader context of the local environment
 is presented before concluding remarks.
