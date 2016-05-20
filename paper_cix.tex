@@ -1,5 +1,6 @@
-%\documentclass{sig-alternate-05-2015}
-\documentclass{sig-alternate-10pt}
+\documentclass[10pt]{sig-alternate-05-2015}
+%\documentclass{sig-alternate-10pt}
+%\documentclass{sigcomm-alternate}
 
 \usepackage[l2tabu,orthodox]{nag}  % Check for use of obsolete LaTeX packages/constructs
 \usepackage[utf8x]{inputenc}       % This file is formatted in UTF-8
@@ -26,36 +27,44 @@
 \usepackage{todonotes}
 \newcommand{\narrative}[1]{\textcolor{blue}{(narrative: #1)}}
 
+%%MF -- To put all authors on front page, and save space.
+\newcommand{\superscript}[1]{\raisebox{1ex}{\ensuremath{{\mathrm{#1}}}}}
+%\def\sharedaffiliation{\end{tabular}\newline\begin{tabular}{c}}
+\def\we{\superscript{\ast}}
+\def\wh{\superscript{\dag}}
+\def\wg{\superscript{\ddag}}
+\def\ws{\superscript{\natural}}
 
 \begin{document}
 
 % % Copyright
-% \setcopyright{acmcopyright}
+\setcopyright{acmcopyright}
 % %\setcopyright{acmlicensed}
 % %\setcopyright{rightsretained}
 % %\setcopyright{usgov}
 % %\setcopyright{usgovmixed}
 % %\setcopyright{cagov}
 % %\setcopyright{cagovmixed}
-%
-%
-% % DOI
-% \doi{10.475/123_4}
-%
-% % ISBN
-% \isbn{123-4567-24-567/08/06}
-%
-% % Conference
-% \conferenceinfo{PLDI '13}{June 16--19, 2013, Seattle, WA, USA}
-%
-% \acmPrice{\$15.00}
-%
-%
-% % --- Author Metadata here ---
-% \conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
-% %\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
-% %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
-% % --- End of Author Metadata ---
+
+
+% DOI
+\doi{http://dx.doi.org/10.1145/2940157.2940162}
+
+% ISBN
+\isbn{978-1-4503-4423-4/16/08}
+
+% Conference
+\conferenceinfo{GAIA,}{August 22-26, 2016, Florianopolis, Brazil}
+\CopyrightYear{2016}
+
+\acmPrice{\$15.00}
+
+
+% --- Author Metadata here ---
+% \conferenceinfo{GAIA,}{August 22-26, 2016 Florianopolis, Brazil}
+% \CopyrightYear{2016} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+% \crdata{978-1-4503-4423-4}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
 
 \title{RemIX: A Distributed Internet Exchange\\for Remote and Rural Networks
 % \titlenote{(Produces the permission block, and
@@ -159,17 +168,21 @@ Edinburgh), and Richard Simmons (University of Stirling)
 }
 
 \maketitle
+
 \begin{abstract}
-The concept of the \ac{IXP}, an Ethernet fabric central to the structure of the
-global Internet, is largely absent from the development of community-driven
-collaborative network infrastructure. The reasons for this are two-fold.
-\acp{IXP} exist in central, typically urban, environments where strong network
-infrastructure ensures high levels of connectivity. Between rural and remote
-regions, where networks are separated by distance and terrain, no such
-infrastructure exists. In this paper we present RemIX a distributed \acp{IXP}
-architecture designed for the community network environment. We examine this
-praxis using an implementation in Scotland, with suggestions for future
-development and research.
+
+The concept of the \ac{IXP}, an Ethernet fabric central to the
+structure of the global Internet, is largely absent from the
+development of community-driven collaborative network infrastructure.
+%The reasons for this are two-fold.
+\acp{IXP} exist in central,
+typically urban, environments where strong network infrastructure
+ensures high levels of connectivity. Between rural and remote regions,
+where networks are separated by distance and terrain, no such
+infrastructure exists. In this paper we present RemIX a distributed
+\acp{IXP} architecture designed for the community network environment.
+We examine this praxis using an implementation in Scotland, with
+suggestions for future development and research.
 
 \begin{comment} %MF-comment
 The concept of the \ac{IXP} is, so central to the
@@ -220,6 +233,7 @@ between these networks, and increases the resilience of access network
 connectivity. We present the relevant components, and describe our
 implementation, so that our efforts may be reproduced.
 \end{comment} % MF-comment
+
 \end{abstract}
 
 
@@ -235,7 +249,7 @@ implementation, so that our efforts may be reproduced.
 
 \section{RemIX Architecture} \label{sec:arch} \input{arch}
 
-\section{RemIX Deployment in Scotland} \label{sec:impl} \input{scotland}
+\section{RemIX Deployed in Scotland} \label{sec:impl} \input{scotland}
 
 %\section{Guifi in Catalonia} \label{sec:impl} \input{catalonia}
 

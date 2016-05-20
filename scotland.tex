@@ -62,16 +62,17 @@ correspond to the service areas reachable from each site.
   switching fabric and the solid lines to member connections.}
 \end{figure*}
 
-We complement \ac{WHIX}' physical topology in Figure~\ref{fig:whixmap} with
-the member network in Figure~\ref{fig:phytop}. In the latter, unlabeled red
-nodes are the \ac{WHIX} points of presence and correspond with the same set of
-red nodes in Figure~\ref{fig:whixmap}. The dashed lines represent the fully
-connected virtual topology that implements the exchange E-LAN.
+We complement \ac{WHIX}' physical topology in Figure~\ref{fig:whixmap}
+with the member network in Figure~\ref{fig:phytop}. In the latter,
+unlabeled red nodes are the \ac{WHIX} points of presence and
+correspond with the same set of red nodes in Figure~\ref{fig:whixmap}.
+The dashed lines represent the fully connected virtual topology that
+implements the exchange E-LAN.
 
 The two places in the region where long-distance ethernet circuits are
 available on the mainland are the towns of Mallaig and Kyle of
-Lochalsh. Circuits\footnote{At the time of writing, the circuit from
-Mallaig is in place, and that from Kyle is planned.} from these sites
+Lochalsh. Circuits\footnote{\small{At the time of writing, the Mallaig
+circuit exists, and that from Kyle is pending.}} from these sites
 connect back to the Pulsant datacentre in Edinburgh to facilitate
 remote peering --- and indeed the provision of Internet access via the
 exchange point.
@@ -132,26 +133,27 @@ ports.
 
 \subsection{West Highland IX at Layer 3+}
 
-Given logical connectivity between all member ports, it remains to assign IP
-addresses to their border routers, as well as public infrastructure such as the
-router server. As mentioned above the use of private IP address space for this
-purpose is undesirable since it generates risks of collisions with members' own
-infrastructure. \ac{WHIX}, and more generally RemIX, is fortunate in this
-regard: The design meets the definition of an \ac{IXP}~\cite{ripe451,whixrules},
-making it possible to acquire IPv4 and IPv6 address allocations from RIPE
-NCC~\cite{ripe649}.
+Given logical connectivity between all member ports, it remains to
+assign IP addresses to their border routers, as well as public
+infrastructure such as the router server. As mentioned above the use
+of private IP address space for this purpose is undesirable since it
+generates risks of collisions with members' own infrastructure.
+\ac{WHIX}, and more generally RemIX, is fortunate in this regard: The
+design meets the definition of an \ac{IXP}~\cite{ripe451,whixrules},
+making it possible to acquire IPv4 and IPv6 address allocations from
+RIPE NCC~\cite{ripe649}.
 
 %%%%% FIGURE %%%%%
 \begin{figure}[h]
-  \resizebox{0.8\linewidth}{!}{
+  \resizebox{1.0\linewidth}{!}{
     \begin{tikzpicture}
       \whixtopodiagram
     \end{tikzpicture}
   }
   \caption{
-  Autonomous System topology. The members of a RemIX form a fully
-  connected network where each may communicate with another over the
-  exchange without intermediation.
+  Autonomous System topology. WHIX members are fully
+  connected; communication over the
+  exchange needs no intermediation.
   %% Unusually for \acp{IXP} it is
   %% common practice to provide Internet transit over the exchange for
   %% the vast majority of members that require this. Note as well the
@@ -187,14 +189,15 @@ connectivity to the global Internet, is provided over the exchange.
 Our experience motivates higher-level comments to further distinguish
 RemIX deployments form their larger \ac{IXP} cousins. Flat networks
 consisting of a single layer-2 broadcast domain can be plagued by
-problems that are difficult to troubleshoot. By its very design RemIX requires
-that members be able to communicate directly without mediation at the
-IP layer. Like other \acp{IXP} RemIX eliminates a large class of
-potential problems by allowing only unicast and \acs{ARP} traffic on
-the exchange. Moreover, members must nominate a specific \acs{MAC}
-address for their connections, which reduces the risk of loops and
-broadcast storms. We also adopt best practices such as quarantines for
-new connections while they are evaluated for correctness.
+problems that are difficult to troubleshoot. By its very design RemIX
+requires that members be able to communicate directly without
+mediation at the IP layer. Like other \acp{IXP} RemIX eliminates a
+large class of potential problems by allowing only unicast and
+\acs{ARP} traffic on the exchange. Moreover, members must nominate a
+specific \acs{MAC} address for their connections, which reduces the
+risk of loops and broadcast storms. We also adopt best practices such
+as quarantines for new connections while they are evaluated for
+correctness.
 
 % Many working network engineers have had the experience of inheriting a flat
 % network consisting of a single layer-2 broadcast domain, invariably plagued by

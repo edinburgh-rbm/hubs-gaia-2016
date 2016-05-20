@@ -11,11 +11,12 @@ Our requirements are shaped by three broad goals:
     fundamental to their sustainability.
 \end{inparaenum}
 %Concretely this means that the
-Member networks must be able to connect to one or more transit providers.
-Members must also be free to arrange and articulate policies among themselves.
-These requirements imply that a \emph{logical} concentration of inter-network
-connections is desirable, which suggests a shared switching fabric below the
-network layer.
+Member networks must be able to connect to one or more transit
+providers. Members must also be free to arrange and articulate
+policies among themselves. These requirements imply that a
+\emph{logical} concentration of inter-network connections is
+desirable, which suggests a shared switching fabric below the network
+layer.
 
 \begin{figure*}
   \subfloat[Traditional IXP]{
@@ -25,7 +26,7 @@ network layer.
       \end{tikzpicture}
       \label{fig:ixbA}
     }
-  } \hfill
+  } \hspace{\hfill}
   \subfloat[Modern urban IXP]{
     \resizebox{0.45\columnwidth}{!}{
       \begin{tikzpicture}
@@ -33,7 +34,7 @@ network layer.
       \end{tikzpicture}
       \label{fig:ixbB}
     }
-  } \hfill
+  } \hspace{\hfill}
   \subfloat[RemIX]{
     \resizebox{0.45\columnwidth}{!}{
       \begin{tikzpicture}
@@ -46,32 +47,34 @@ network layer.
   \label{fig:ixb}
 \end{figure*}
 
-Networks that are capable of connecting to the same location can do so with an
-Ethernet switch. This is the basis for traditional \ac{IXP} design (Fig.~\ref{fig:ixbA}) where member networks connect to a central fabric
-with their own router that sits inside the IXP facility. Our remote networks
-have no such luxury. In response, we take and distribute the contemporary design
-of a multi-site \ac{IXP} (Fig.~\ref{fig:ixbB}). A multi-site \acp{IXP}
-presents a single logical fabric to its members, implemented with switches
-that are joined by private circuits.
+Networks that can connect to the same location can do so
+via an Ethernet switch. This leads to conventional \ac{IXP}
+design (Fig.~\ref{fig:ixbA}) where member networks connect to a
+central fabric with their own router that sits inside the IXP
+facility. Remote networks have no such luxury. In response, we
+take and distribute the contemporary design of multi-site \acp{IXP}
+(Fig.~\ref{fig:ixbB}). Multi-site \acp{IXP} present a single
+logical fabric to members, implemented with switches
+joined by private circuits.
 % Since we don't have that luxury, we take the contemporary design of a
 % multi-site
 % \ac{IXP} as in Figure~\ref{fig:ixbB} and take it to a \emph{maximally
 % distributed} extreme---Figure~\ref{fig:ixbC}.
 
-The RemIX architecture that emerges (Fig.~\ref{fig:ixbC})
-has no large facility nor physical housing. Instead it is
-distributed so that \emph{lightweight} points of presence may be established
-where there are as few as two members. Members either colocate their border
-routers with the exchange switch, or remotely on the far end of a link, as
-circumstances dictate.
+The RemIX architecture that emerges (Fig.~\ref{fig:ixbC}) has no large
+facility nor physical housing. Instead it is distributed so that
+\emph{lightweight} points of presence may be established where there
+are as few as two members. Members either colocate their border
+routers with the exchange switch, or remotely on the far end of a
+link, as circumstances dictate.
 
-These circumstances motivate the lightweight nature of points of presence.
-Since the fabric is distributed, fewer networks that will connect from each
-site. High port densities are unnecessary. Simultaneously, space and power are
-both at a premium. For example, a remote port into RemIX could be housed in a
-small cabinet atop a hill, or in space that is donated by a property owner for
-this purpose. Equipment is therefore restricted to the small and
-power-efficient.
+These circumstances motivate the lightweight nature of points of
+presence. Since the fabric is distributed, fewer networks that will
+connect from each site. High port densities are unnecessary.
+Simultaneously, space and power are both at a premium. For example, a
+remote port into RemIX could be housed in a small cabinet atop a hill,
+or in space that is donated by a property owner for this purpose.
+Equipment is therefore restricted to the small and power-efficient.
 
 
 \subsection{RemIX Components}
@@ -106,34 +109,37 @@ private IP addresses for the exchange itself~\cite{rfc1918}.
 
 \subsubsection{Exchange Transit}
 
-RemIX members' IP address spaces will be small, and need some entity to
-advertise larger netblocks on their behalf. This suggests a specialized transit
-provider to mediate between members and the wider Internet. For this reason
-RemIX members form a confederation with a transit provider that
-presents them collectively to upstream providers and other exchange points. This
-is unusual for \acp{IXP}: Rarely are transit relationships implemented with
-exchange points. However, this is normal in RemIX, and likely necessary to
-function in the intended environment. We note that transit service should be
-optional to members, with no requirement to purchase said provider's transit as
-a condition for joining the exchange. Also, nothing prevents other such
+RemIX members' IP address spaces will be small, and need some entity
+to advertise larger netblocks on their behalf. This suggests a
+specialized transit provider to mediate between members and the wider
+Internet. For this reason RemIX members form a confederation with a
+transit provider that presents them collectively to upstream providers
+and other exchange points. This is unusual for \acp{IXP}: Rarely are
+transit relationships implemented with exchange points. In RemIX this
+is normal, and likely necessary to function in the intended
+environment. We note that transit service should be optional,
+% to members,
+with no requirement to purchase said provider's transit as a
+condition for joining the exchange. Also, nothing prevents other such
 providers from participating.
 
 \subsubsection{Auxiliary Services}
 
-\acs{BGP} configuration can be a complex. For example, upon
-connecting to RemIX, member networks need to be configured to peer amongst
-themselves. The complexity quickly increases as session numbers grow with the
-square of the number of participants. Instead, \acp{IXP} use
-\emph{route-servers} to repeats announcements from one member to all others. A
-route reflector keeps the configuration burden to a minimum. Other useful
-services such as \acs{NTP} clocks and looking glasses for assistance in
-debugging may be offered in addition.
+\acs{BGP} configuration can be a complex. For example, upon connecting
+to RemIX, member networks need to be configured to peer amongst
+themselves. The complexity quickly increases as session numbers grow
+with the square of the number of participants. Instead, \acp{IXP} use
+\emph{route-servers} to repeats announcements from one member to all
+others. A route reflector keeps the configuration burden to a minimum.
+Other useful services such as \acs{NTP} clocks and looking glasses for
+assistance in debugging may be offered in addition.
 
 %\subsection{Structural Benefits}
 
-The overall RemIX architecture is motivated by our own needs in Scotland. In
-the next section we present our first-phase implementation of RemIX,
-alongside remarks on usability and directions for the future.
+The overall RemIX architecture is motivated by our own needs in
+Scotland. In the next section we present our first-phase
+implementation of RemIX, alongside remarks on usability and directions
+for the future.
 
 %\begin{itemize}
 %    \item provides default transit to Internet (useful because of IP
