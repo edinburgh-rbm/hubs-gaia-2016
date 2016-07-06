@@ -81,21 +81,24 @@ Equipment is therefore restricted to the small and power-efficient.
 
 \subsubsection{Switching Fabric}
 
-The exchange itself must mimic a distributed Ethernet switch. Multiple
-Ethernet-like link options include fibre, 802.11 wireless, licensed wireless, fibre, leased pseudo-wires. The switching fabric may be implemented on
-top using \acs{BGP}-\acs{VPLS}~\cite{rfc4761} (as we have in
-Section~\ref{sec:bgpvpls}),
-\acs{BATMAN}~\cite{johnson2008simple}, or
-\acs{TRILL}~\cite{perlman2004rbridges} protocols. The salient feature
-between them is MAC address learning to establish an Ethernet switch
-similar to the \ac{MEF} E-LAN interface
-specification~\cite{mef62}.%,mefes}.
+The exchange itself must mimic an
+%distributed
+Ethernet switch. Multiple Ethernet-like link options include fibre, 802.11
+wireless, licensed wireless, fibre, leased pseudowires. The switching fabric may
+be implemented on top using \acs{BGP}-\acs{VPLS}~\cite{rfc4761} (as we have in
+Section~\ref{sec:bgpvpls}), \acs{BATMAN}~\cite{johnson2008simple}, or
+\acs{TRILL}~\cite{perlman2004rbridges} protocols. The salient feature between
+them is MAC address learning to establish an Ethernet switch similar to the
+\ac{MEF} E-LAN interface specification~\cite{mef62}.%,mefes}.
 
 \subsubsection{Member \acp{AS}}
 
 Among traditional \acp{IXP} connected networks are encapsulated into
-Autonomous Systems (\acp{AS}). Among RemIX member networks, the
-policies of the small sized member networks are
+Autonomous Systems (\acp{AS}). Among RemIX member networks,
+%the
+policies of the small
+%sized
+member networks are
 %member networks means that the policies are somewhat
 different from the Internet's \ac{DFZ}. In particular, member
 networks' smaller routers will be neither be capable of storing the
@@ -125,14 +128,19 @@ providers from participating.
 
 \subsubsection{Auxiliary Services}
 
-\acs{BGP} configuration can be a complex. For example, upon connecting
+\acs{BGP} configuration can be complex. For example, upon connecting
 to RemIX, member networks need to be configured to peer amongst
 themselves. The complexity quickly increases as session numbers grow
 with the square of the number of participants. Instead, \acp{IXP} use
-\emph{route-servers} to repeats announcements from one member to all
-others. A route reflector keeps the configuration burden to a minimum.
-Other useful services such as \acs{NTP} clocks and looking glasses for
-assistance in debugging may be offered in addition.
+\emph{route-servers} to repeat
+ % announcements from one member to all others.
+member announcements to all others. Route reflectors keep
+configuration burdens to a minimum.
+Other useful services such as \acs{NTP} clocks and looking glasses
+%for assistance  in debugging
+may be offered in addition.
+% \acs{NTP} clocks, looking glasses for debugging, and other useful
+% services, may be offered in addition.
 
 %\subsection{Structural Benefits}
 

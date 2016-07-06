@@ -22,7 +22,9 @@ construction of an exchange fabric geographically ambitious. Four networks have
 a history of interconnecting and sharing network resources, pre-established
 relationships that must be respected in our deployment.
 
-Our deployment's location is its namesake, the \ac{WHIX}. Both logical
+Our deployment's location is its namesake, the \ac{WHIX}.
+%Both
+Logical
 and physical layers are described below, with additional lessons and
 comments drawn from our experience.
 
@@ -62,8 +64,8 @@ correspond to the service areas reachable from each site.
   switching fabric and the solid lines to member connections.}
 \end{figure*}
 
-We complement \ac{WHIX}' physical topology in Figure~\ref{fig:whixmap}
-with the member network in Figure~\ref{fig:phytop}. In the latter,
+The \ac{WHIX} physical topology in Figure~\ref{fig:whixmap} appears alongside
+the member network in Figure~\ref{fig:phytop}. In the latter,
 unlabeled red nodes are the \ac{WHIX} points of presence and
 correspond with the same set of red nodes in Figure~\ref{fig:whixmap}.
 The dashed lines represent the fully connected virtual topology that
@@ -77,7 +79,7 @@ connect back to the Pulsant datacentre in Edinburgh to facilitate
 remote peering --- and indeed the provision of Internet access via the
 exchange point.
 
-The radio links are implemented with equipment from Ubiquiti Networks,
+The radio links are implemented with Ubiquiti Networks equipment,
 configured in transparent bridge mode so that they appear as Ethernet from a
 functional perspective. The switching fabric itself at each of \ac{WHIX} points
 of presence is implemented with Mikrotik routers. This choice was made because
@@ -89,7 +91,8 @@ the E-LAN service.
 
 \subsection{West Highland IX at Layer 2}\label{sec:bgpvpls}
 
-We emphasize that layer-2 details are \emph{internal} to
+%We emphasize that 
+Layer-2 details are \emph{internal} to
 \ac{WHIX}, and invisible to members who only see an Ethernet switch. Also, our
 implementation decisions are by no means the only possible means of
 implementation.
